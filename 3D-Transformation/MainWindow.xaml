@@ -6,7 +6,12 @@
         xmlns:local="clr-namespace:_3D_Transformation"
         mc:Ignorable="d"
         Title="MainWindow" Height="450" Width="800">
-    <Grid>
+    <TabControl>
+        <TabItem Header="Main Menu">
+        </TabItem>
         
-    </Grid>
+        <TabItem Header="Translation">
+            
+        </TabItem>
+    </TabControl>
 </Window>
