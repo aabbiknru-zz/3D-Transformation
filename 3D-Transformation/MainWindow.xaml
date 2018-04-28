@@ -2,10 +2,11 @@
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"        
+        xmlns:HelixToolkit="clr-namespace:HelixToolkit.Wpf;assembly=HelixToolkit.Wpf"
         xmlns:local="clr-namespace:_3D_Transformation"
         mc:Ignorable="d"
-        Title="MainWindow"  Width="1280" Height="800">
+        Title="MainWindow"  Width="1280" Height="720">
     <TabControl>
         <TabItem Header="Main Menu">
             <Grid Background="#093145">
@@ -22,7 +23,7 @@
                 </Grid.ColumnDefinitions>
 
                 <Grid Grid.Row="0" Grid.ColumnSpan="3"/>
-                
+
                 <Grid Grid.Row="1" Grid.Column="0"/>
 
                 <Grid Grid.Row="1" Grid.Column="1">
@@ -39,7 +40,7 @@
                         </Grid.ColumnDefinitions>
 
                         <TextBlock Text="Tugas Transformasi 3D" FontSize="64" Foreground="White" TextAlignment="Center" Grid.Row="0" Grid.ColumnSpan="3"/>
-                                                
+
                         <GroupBox Header="Anggota Kelompok" FontSize="24" Foreground="White" Margin="2" Grid.Row="1" Grid.Column="1">
                             <Grid>
                                 <Grid.RowDefinitions>
@@ -56,24 +57,252 @@
 
                                 <TextBlock Text="Ibnu Akbar" FontSize="16" Foreground="White" TextAlignment="Left" Margin="4" Grid.Row="0" Grid.Column="0"/>
                                 <TextBlock Text="16/395399/TK/44691" FontSize="16" Foreground="White" TextAlignment="Right" Margin="4" Grid.Row="0" Grid.Column="1"/>
+
                                 <TextBlock Text="Krismanuel Pratama Putra" FontSize="16" Foreground="White" TextAlignment="Left" Margin="4" Grid.Row="1" Grid.Column="0"/>
                                 <TextBlock Text="16/395401/TK/44693" FontSize="16" Foreground="White" TextAlignment="Right" Margin="4" Grid.Row="1" Grid.Column="1"/>
+
                                 <TextBlock Text="Panji Riski Hernanda" FontSize="16" Foreground="White" TextAlignment="Left" Margin="4" Grid.Row="2" Grid.Column="0"/>
                                 <TextBlock Text="16/395414/TK/44706" FontSize="16" Foreground="White" TextAlignment="Right" Margin="4" Grid.Row="2" Grid.Column="1"/>
+
                                 <TextBlock Text="Yudit Adythia Putra" FontSize="16" Foreground="White" TextAlignment="Left" Margin="4" Grid.Row="3" Grid.Column="0"/>
                                 <TextBlock Text="16/395423/TK/44715" FontSize="16" Foreground="White" TextAlignment="Right" Margin="4" Grid.Row="3" Grid.Column="1"/>
                             </Grid>
                         </GroupBox>
                     </Grid>
                 </Grid>
-                
+
                 <Grid Grid.Row="1" Grid.Column="2"/>
-                
+
                 <Grid Grid.Row="2" Grid.ColumnSpan="3"/>
             </Grid>
         </TabItem>
 
+        <!-- _______ _____            _   _  _____ _            _______ _____ ____  _   _ -->
+        <!--|__   __|  __ \     /\   | \ | |/ ____| |        /\|__   __|_   _/ __ \| \ | |-->
+        <!--   | |  | |__) |   /  \  |  \| | (___ | |       /  \  | |    | || |  | |  \| |-->
+        <!--   | |  |  _  /   / /\ \ | . ` |\___ \| |      / /\ \ | |    | || |  | | . ` |-->
+        <!--   | |  | | \ \  / ____ \| |\  |____) | |____ / ____ \| |   _| || |__| | |\  |-->
+        <!--   |_|  |_|  \_\/_/    \_\_| \_|_____/|______/_/    \_\_|  |_____\____/|_| \_|-->
         <TabItem Header="Translation">
+            <Grid Background="#093145">
+                <Grid.RowDefinitions>
+                    <RowDefinition/>
+                    <RowDefinition Height="Auto"/>
+                </Grid.RowDefinitions>
+
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition/>
+                    <ColumnDefinition Width="Auto"/>
+                </Grid.ColumnDefinitions>
+
+                <Grid Grid.Row="0" Grid.Column="0" Background="AliceBlue">
+                    <HelixToolkit:HelixViewport3D ModelUpDirection="0,0,1" ShowCoordinateSystem="True" ShowFrameRate="True">
+                        <HelixToolkit:SunLight/>
+                        <ModelVisual3D x:Name="ModelVisual" Content="{Binding Model}"/>
+                        <HelixToolkit:GridLinesVisual3D MinorDistance="1" MajorDistance="5" Thickness="0.05" Length="200" Width="200"/>
+                    </HelixToolkit:HelixViewport3D>
+                </Grid>
+
+                <Grid Grid.Row="0" Grid.Column="1" Background="AliceBlue">
+                    <Grid.RowDefinitions>
+                        <RowDefinition/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition/>
+                    </Grid.RowDefinitions>
+
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition/>
+                        <ColumnDefinition Width="Auto"/>
+                        <ColumnDefinition/>
+                    </Grid.ColumnDefinitions>
+
+                    <Grid Grid.RowSpan="3" Grid.Column="0" Background="#093145"/>
+
+                    <Grid Grid.Row="0"  Grid.Column="1" Background="#093145"/>
+
+                    <Grid Grid.RowSpan="3" Grid.Column="2" Background="#093145"/>
+
+                    <Grid Grid.Row="1" Grid.Column="1">
+                        <Grid.RowDefinitions>
+                            <RowDefinition/>
+                            <RowDefinition/>
+                            <RowDefinition/>
+                            <RowDefinition/>
+                        </Grid.RowDefinitions>
+
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition/>
+                            <ColumnDefinition/>
+                        </Grid.ColumnDefinitions>
+
+                        <GroupBox Header="Objek" Margin="2" Grid.Row="0" Grid.ColumnSpan="2">
+                            <Grid>
+                                <Grid.RowDefinitions>
+                                    <RowDefinition/>
+                                    <RowDefinition/>
+                                    <RowDefinition/>
+                                    <RowDefinition/>
+                                    <RowDefinition/>
+                                    <RowDefinition/>
+                                </Grid.RowDefinitions>
+
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition/>
+                                    <ColumnDefinition/>
+                                </Grid.ColumnDefinitions>
+
+                                <TextBlock Text="Pilih Salah Satu Objek :" Margin="2" Grid.Row="0" Grid.ColumnSpan="2"/>
+
+                                <ComboBox Margin="2" Grid.Row="1" Grid.ColumnSpan="2"/>
+
+                                <TextBlock Text="Panjang (X) :" Margin="2" Grid.Row="2" Grid.Column="0"/>
+                                <TextBox Text="1" TextAlignment="Center" MaxLength="2" Margin="2" Grid.Row="2" Grid.Column="1"/>
+                                
+                                <TextBlock Text="Lebar (Y) :" Margin="2" Grid.Row="3" Grid.Column="0"/>
+                                <TextBox Text="1" TextAlignment="Center" MaxLength="2" Margin="2" Grid.Row="3" Grid.Column="1"/>
+                                
+                                <TextBlock Text="Tinggi (Z) :" Margin="2" Grid.Row="4" Grid.Column="0"/>
+                                <TextBox Text="0" TextAlignment="Center" MaxLength="2" Margin="2" Grid.Row="4" Grid.Column="1"/>
+
+                                <Button Content="Set Objek" Margin="2" Grid.Row="5" Grid.ColumnSpan="2"/>
+                            </Grid>
+                        </GroupBox>
+
+                        <GroupBox Header="Titik Awal" Margin="2" Grid.Row="1" Grid.ColumnSpan="2">
+                            <Grid>
+                                <Grid.RowDefinitions>
+                                    <RowDefinition/>
+                                    <RowDefinition/>
+                                </Grid.RowDefinitions>
+
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition/>
+                                    <ColumnDefinition/>
+                                    <ColumnDefinition/>
+                                    <ColumnDefinition/>
+                                    <ColumnDefinition/>
+                                    <ColumnDefinition/>
+                                </Grid.ColumnDefinitions>
+
+                                <TextBlock Text="X :" Margin="2" Grid.Row="0" Grid.Column="0"/>
+                                <TextBox Text="0" TextAlignment="Center" MaxLength="2" Width="25" Margin="2" Grid.Row="0" Grid.Column="1"/>
+                                <TextBlock Text="Y :" Margin="2" Grid.Row="0" Grid.Column="2"/>
+                                <TextBox Text="0" TextAlignment="Center" MaxLength="2" Width="25" Margin="2" Grid.Row="0" Grid.Column="3"/>
+                                <TextBlock Text="Z :" Margin="2" Grid.Row="0" Grid.Column="4"/>
+                                <TextBox Text="0" TextAlignment="Center" MaxLength="2" Width="25" Margin="2" Grid.Row="0" Grid.Column="5"/>
+
+                                <Button Content="Set Titik Awal" Margin="2" Grid.Row="1" Grid.ColumnSpan="6"/>
+                            </Grid>
+                        </GroupBox>
+
+                        <GroupBox Header="Perpindahan" Margin="2" Grid.Row="2" Grid.ColumnSpan="2">
+                            <Grid>
+                                <Grid.RowDefinitions>
+                                    <RowDefinition/>
+                                    <RowDefinition/>
+                                </Grid.RowDefinitions>
+
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition/>
+                                    <ColumnDefinition/>
+                                    <ColumnDefinition/>
+                                    <ColumnDefinition/>
+                                    <ColumnDefinition/>
+                                    <ColumnDefinition/>
+                                </Grid.ColumnDefinitions>
+
+                                <TextBlock Text="X :" Margin="2" Grid.Row="0" Grid.Column="0"/>
+                                <TextBox Text="0" TextAlignment="Center" MaxLength="2" Width="25" Margin="2" Grid.Row="0" Grid.Column="1"/>
+                                <TextBlock Text="Y :" Margin="2" Grid.Row="0" Grid.Column="2"/>
+                                <TextBox Text="0" TextAlignment="Center" MaxLength="2" Width="25" Margin="2" Grid.Row="0" Grid.Column="3"/>
+                                <TextBlock Text="Z :" Margin="2" Grid.Row="0" Grid.Column="4"/>
+                                <TextBox Text="0" TextAlignment="Center" MaxLength="2" Width="25" Margin="2" Grid.Row="0" Grid.Column="5"/>
+
+                                <Button Content="Set Perpindahan" Margin="2" Grid.Row="1" Grid.ColumnSpan="6"/>
+                            </Grid>
+                        </GroupBox>
+
+                        <Button Content="Translate" Margin="2" Grid.Row="3" Grid.Column="0"/>
+                        <Button Content="Reset" Margin="2" Grid.Row="3" Grid.Column="1"/>
+                    </Grid>
+
+                    <Grid Grid.Row="2"  Grid.Column="1" Background="#093145"/>
+                </Grid>
+
+                <Grid Grid.Row="1" Grid.Column="0" Background="AliceBlue">
+                    <Grid.RowDefinitions>
+                        <RowDefinition/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition/>
+                    </Grid.RowDefinitions>
+
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition/>
+                        <ColumnDefinition Width="Auto"/>
+                        <ColumnDefinition/>
+                    </Grid.ColumnDefinitions>
+
+                    <Grid Grid.Row="0"  Grid.ColumnSpan="3" Background="#093145"/>
+
+                    <Grid Grid.Row="1"  Grid.Column="0" Background="#093145"/>
+
+                    <GroupBox Header="Matriks Transformasi" Margin="2" Grid.Row="1" Grid.Column="1">
+                        <Grid>
+                            <Grid.RowDefinitions>
+                                <RowDefinition/>
+                                <RowDefinition/>
+                                <RowDefinition/>
+                                <RowDefinition/>
+                                <RowDefinition/>
+                                <RowDefinition/>
+                                <RowDefinition/>
+                                <RowDefinition/>
+                                <RowDefinition/>
+                                <RowDefinition/>
+                                <RowDefinition/>
+                                <RowDefinition/>
+                            </Grid.RowDefinitions>
+
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition/>
+                                <ColumnDefinition/>
+                            </Grid.ColumnDefinitions>
+
+                            <TextBlock Text="-> Persegi Panjang ABCD dengan panjang 1 dan lebar 1" FontFamily="Consolas" Grid.Row="0" Grid.ColumnSpan="2"/>
+
+                            <TextBlock Text="   akan ditranslasi sejauh 0 pada sumbu x, 0 pada sumbu y, dan 0 pada sumbu z" FontFamily="Consolas" Grid.Row="1" Grid.ColumnSpan="2"/>
+
+                            <TextBlock Text="   A (0, 0, 0)" FontFamily="Consolas" Grid.Row="2" Grid.Column="0"/>
+                            <TextBlock Text="   B (0, 0, 0)" FontFamily="Consolas" Grid.Row="2" Grid.Column="1"/>
+                            
+                            <TextBlock Text="   C (0, 0, 0)" FontFamily="Consolas" Grid.Row="3" Grid.Column="0"/>
+                            <TextBlock Text="   D (0, 0, 0)" FontFamily="Consolas" Grid.Row="3" Grid.Column="1"/>
+                            
+                            <TextBlock Text="   E (0, 0, 0)" FontFamily="Consolas" Visibility="Hidden" Grid.Row="4" Grid.Column="0"/>
+                            <TextBlock Text="   F (0, 0, 0)" FontFamily="Consolas" Visibility="Hidden" Grid.Row="4" Grid.Column="1"/>
+
+                            <TextBlock Text="   G (0, 0, 0)" FontFamily="Consolas" Visibility="Hidden" Grid.Row="5" Grid.Column="0"/>
+                            <TextBlock Text="   H (0, 0, 0)" FontFamily="Consolas" Visibility="Hidden" Grid.Row="5" Grid.Column="1"/>
+
+                            <TextBlock Text="+----------+" FontFamily="Consolas" Grid.Row="6" Grid.ColumnSpan="2"/>
+
+                            <TextBlock Text="-> [X'] = [T] * [X]" FontFamily="Consolas" Grid.Row="7" Grid.ColumnSpan="2"/>
+                            <TextBlock Text="   | ... ... ... ... |   | ... ... ... ... |   | ... ... ... ... |" Grid.Row="8" FontFamily="Consolas" Grid.ColumnSpan="2"/>
+                            <TextBlock Text="   | ... ... ... ... | = | ... ... ... ... | * | ... ... ... ... |" Grid.Row="9" FontFamily="Consolas" Grid.ColumnSpan="2"/>
+                            <TextBlock Text="   | ... ... ... ... |   | ... ... ... ... |   | ... ... ... ... |" Grid.Row="10" FontFamily="Consolas" Grid.ColumnSpan="2"/>
+                            <TextBlock Text="   | ... ... ... ... |   | ... ... ... ... |   | ... ... ... ... |" Grid.Row="11" FontFamily="Consolas" Grid.ColumnSpan="2"/>
+                        </Grid>
+                    </GroupBox>
+
+                    <Grid Grid.Row="1"  Grid.Column="2" Background="#093145"/>
+
+                    <Grid Grid.Row="2"  Grid.ColumnSpan="3" Background="#093145"/>
+                </Grid>
+
+                <Grid Grid.Row="1" Grid.Column="1">
+                    <TextBlock Text="Copyright(c) KMKI 2018" FontFamily="Consolas" Foreground="White" FontSize="10" HorizontalAlignment="Right" VerticalAlignment="Bottom"/>
+                </Grid>
+            </Grid>
         </TabItem>
     </TabControl>
 </Window>

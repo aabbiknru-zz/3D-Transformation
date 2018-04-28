@@ -15,14 +15,13 @@ using System.Windows.Shapes;
 
 namespace _3D_Transformation
 {
-    /// <summary>
-    /// Interaction logic for MainWindow.xaml
-    /// </summary>
     public partial class MainWindow : Window
     {
         public MainWindow()
         {
-            InitializeComponent();
+            InitializeComponent();            
         }
+
+
     }
 }
