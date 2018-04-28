@@ -95,11 +95,11 @@
                     <ColumnDefinition Width="Auto"/>
                 </Grid.ColumnDefinitions>
 
-                <Grid Grid.Row="0" Grid.Column="0" Background="AliceBlue">
+                <Grid Margin="2" Grid.Row="0" Grid.Column="0" Background="AliceBlue">
                     <HelixToolkit:HelixViewport3D ModelUpDirection="0,0,1" ShowCoordinateSystem="True" ShowFrameRate="True">
                         <HelixToolkit:SunLight/>
                         <ModelVisual3D x:Name="ModelVisual" Content="{Binding Model}"/>
-                        <HelixToolkit:GridLinesVisual3D MinorDistance="1" MajorDistance="5" Thickness="0.05" Length="200" Width="200"/>
+                        <HelixToolkit:GridLinesVisual3D MinorDistance="1" MajorDistance="5" Thickness="0.0125" Length="200" Width="200"/>
                     </HelixToolkit:HelixViewport3D>
                 </Grid>
 
@@ -153,18 +153,18 @@
 
                                 <TextBlock Text="Pilih Salah Satu Objek :" Margin="2" Grid.Row="0" Grid.ColumnSpan="2"/>
 
-                                <ComboBox Margin="2" Grid.Row="1" Grid.ColumnSpan="2"/>
+                                <ComboBox x:Name="cbxTrObject" Margin="2" Grid.Row="1" Grid.ColumnSpan="2" SelectionChanged="ObjectSelection"/>
 
                                 <TextBlock Text="Panjang (X) :" Margin="2" Grid.Row="2" Grid.Column="0"/>
-                                <TextBox Text="1" TextAlignment="Center" MaxLength="2" Margin="2" Grid.Row="2" Grid.Column="1"/>
+                                <TextBox x:Name="txtTrObjectLength" Text="1" TextAlignment="Center" MaxLength="2" Margin="2" Grid.Row="2" Grid.Column="1"/>
                                 
                                 <TextBlock Text="Lebar (Y) :" Margin="2" Grid.Row="3" Grid.Column="0"/>
-                                <TextBox Text="1" TextAlignment="Center" MaxLength="2" Margin="2" Grid.Row="3" Grid.Column="1"/>
+                                <TextBox x:Name="txtTrObjectWidth" Text="1" TextAlignment="Center" MaxLength="2" Margin="2" Grid.Row="3" Grid.Column="1"/>
                                 
                                 <TextBlock Text="Tinggi (Z) :" Margin="2" Grid.Row="4" Grid.Column="0"/>
-                                <TextBox Text="0" TextAlignment="Center" MaxLength="2" Margin="2" Grid.Row="4" Grid.Column="1"/>
+                                <TextBox x:Name="txtTrObjectHeight" Text="1" TextAlignment="Center" MaxLength="2" Margin="2" Grid.Row="4" Grid.Column="1"/>
 
-                                <Button Content="Set Objek" Margin="2" Grid.Row="5" Grid.ColumnSpan="2"/>
+                                <Button x:Name="btnSetObject" Content="Set Objek" Margin="2" Grid.Row="5" Grid.ColumnSpan="2" Click="Click_btnSetObject"/>
                             </Grid>
                         </GroupBox>
 
@@ -185,13 +185,13 @@
                                 </Grid.ColumnDefinitions>
 
                                 <TextBlock Text="X :" Margin="2" Grid.Row="0" Grid.Column="0"/>
-                                <TextBox Text="0" TextAlignment="Center" MaxLength="2" Width="25" Margin="2" Grid.Row="0" Grid.Column="1"/>
+                                <TextBox x:Name="txtTrOriginX" Text="0" TextAlignment="Center" MaxLength="2" Width="25" Margin="2" Grid.Row="0" Grid.Column="1"/>
                                 <TextBlock Text="Y :" Margin="2" Grid.Row="0" Grid.Column="2"/>
-                                <TextBox Text="0" TextAlignment="Center" MaxLength="2" Width="25" Margin="2" Grid.Row="0" Grid.Column="3"/>
+                                <TextBox x:Name="txtTrOriginY" Text="0" TextAlignment="Center" MaxLength="2" Width="25" Margin="2" Grid.Row="0" Grid.Column="3"/>
                                 <TextBlock Text="Z :" Margin="2" Grid.Row="0" Grid.Column="4"/>
-                                <TextBox Text="0" TextAlignment="Center" MaxLength="2" Width="25" Margin="2" Grid.Row="0" Grid.Column="5"/>
+                                <TextBox x:Name="txtTrOriginZ" Text="0" TextAlignment="Center" MaxLength="2" Width="25" Margin="2" Grid.Row="0" Grid.Column="5"/>
 
-                                <Button Content="Set Titik Awal" Margin="2" Grid.Row="1" Grid.ColumnSpan="6"/>
+                                <Button x:Name="btnTrSetOrigin" Content="Set Titik Awal" Margin="2" Grid.Row="1" Grid.ColumnSpan="6" Click="Click_btnTrSetOrigin"/>
                             </Grid>
                         </GroupBox>
 
@@ -212,18 +212,18 @@
                                 </Grid.ColumnDefinitions>
 
                                 <TextBlock Text="X :" Margin="2" Grid.Row="0" Grid.Column="0"/>
-                                <TextBox Text="0" TextAlignment="Center" MaxLength="2" Width="25" Margin="2" Grid.Row="0" Grid.Column="1"/>
+                                <TextBox x:Name="txtTrMovementX" Text="0" TextAlignment="Center" MaxLength="2" Width="25" Margin="2" Grid.Row="0" Grid.Column="1"/>
                                 <TextBlock Text="Y :" Margin="2" Grid.Row="0" Grid.Column="2"/>
-                                <TextBox Text="0" TextAlignment="Center" MaxLength="2" Width="25" Margin="2" Grid.Row="0" Grid.Column="3"/>
+                                <TextBox x:Name="txtTrMovementY" Text="0" TextAlignment="Center" MaxLength="2" Width="25" Margin="2" Grid.Row="0" Grid.Column="3"/>
                                 <TextBlock Text="Z :" Margin="2" Grid.Row="0" Grid.Column="4"/>
-                                <TextBox Text="0" TextAlignment="Center" MaxLength="2" Width="25" Margin="2" Grid.Row="0" Grid.Column="5"/>
+                                <TextBox x:Name="txtTrMovementZ" Text="0" TextAlignment="Center" MaxLength="2" Width="25" Margin="2" Grid.Row="0" Grid.Column="5"/>
 
-                                <Button Content="Set Perpindahan" Margin="2" Grid.Row="1" Grid.ColumnSpan="6"/>
+                                <Button x:Name="btnSetTranslation" Content="Set Perpindahan" Margin="2" Grid.Row="1" Grid.ColumnSpan="6" Click="Click_btnSetTranslation"/>
                             </Grid>
                         </GroupBox>
 
-                        <Button Content="Translate" Margin="2" Grid.Row="3" Grid.Column="0"/>
-                        <Button Content="Reset" Margin="2" Grid.Row="3" Grid.Column="1"/>
+                        <Button x:Name="btnTranslate" Content="Translate" Margin="2" Grid.Row="3" Grid.Column="0" Click="Click_btnTranslate"/>
+                        <Button x:Name="btnTrReset" Content="Reset" Margin="2" Grid.Row="3" Grid.Column="1" IsEnabled="False" Click="Click_btnTrReset"/>
                     </Grid>
 
                     <Grid Grid.Row="2"  Grid.Column="1" Background="#093145"/>
@@ -268,34 +268,33 @@
                                 <ColumnDefinition/>
                             </Grid.ColumnDefinitions>
 
-                            <TextBlock Text="-> Persegi Panjang ABCD dengan panjang 1 dan lebar 1" FontFamily="Consolas" Grid.Row="0" Grid.ColumnSpan="2"/>
+                            <TextBlock x:Name="txtTrObjectDescription" FontFamily="Consolas" Grid.Row="0" Grid.ColumnSpan="2"/>
 
-                            <TextBlock Text="   akan ditranslasi sejauh 0 pada sumbu x, 0 pada sumbu y, dan 0 pada sumbu z" FontFamily="Consolas" Grid.Row="1" Grid.ColumnSpan="2"/>
+                            <TextBlock x:Name="txtTranslateDescription" FontFamily="Consolas" Grid.Row="1" Grid.ColumnSpan="2"/>
 
-                            <TextBlock Text="   A (0, 0, 0)" FontFamily="Consolas" Grid.Row="2" Grid.Column="0"/>
-                            <TextBlock Text="   B (0, 0, 0)" FontFamily="Consolas" Grid.Row="2" Grid.Column="1"/>
-                            
-                            <TextBlock Text="   C (0, 0, 0)" FontFamily="Consolas" Grid.Row="3" Grid.Column="0"/>
-                            <TextBlock Text="   D (0, 0, 0)" FontFamily="Consolas" Grid.Row="3" Grid.Column="1"/>
-                            
-                            <TextBlock Text="   E (0, 0, 0)" FontFamily="Consolas" Visibility="Hidden" Grid.Row="4" Grid.Column="0"/>
-                            <TextBlock Text="   F (0, 0, 0)" FontFamily="Consolas" Visibility="Hidden" Grid.Row="4" Grid.Column="1"/>
+                            <TextBlock x:Name="txtTrPointA" FontFamily="Consolas" Grid.Row="2" Grid.Column="0"/>
+                            <TextBlock x:Name="txtTrPointB" FontFamily="Consolas" Grid.Row="2" Grid.Column="1"/>
 
-                            <TextBlock Text="   G (0, 0, 0)" FontFamily="Consolas" Visibility="Hidden" Grid.Row="5" Grid.Column="0"/>
-                            <TextBlock Text="   H (0, 0, 0)" FontFamily="Consolas" Visibility="Hidden" Grid.Row="5" Grid.Column="1"/>
+                            <TextBlock x:Name="txtTrPointC" FontFamily="Consolas" Grid.Row="3" Grid.Column="0"/>
+                            <TextBlock x:Name="txtTrPointD" FontFamily="Consolas" Grid.Row="3" Grid.Column="1"/>
 
-                            <TextBlock Text="+----------+" FontFamily="Consolas" Grid.Row="6" Grid.ColumnSpan="2"/>
+                            <TextBlock x:Name="txtTrPointE" FontFamily="Consolas" Grid.Row="4" Grid.Column="0"/>
+                            <TextBlock x:Name="txtTrPointF" FontFamily="Consolas" Grid.Row="4" Grid.Column="1"/>
 
-                            <TextBlock Text="-> [X'] = [T] * [X]" FontFamily="Consolas" Grid.Row="7" Grid.ColumnSpan="2"/>
-                            <TextBlock Text="   | ... ... ... ... |   | ... ... ... ... |   | ... ... ... ... |" Grid.Row="8" FontFamily="Consolas" Grid.ColumnSpan="2"/>
-                            <TextBlock Text="   | ... ... ... ... | = | ... ... ... ... | * | ... ... ... ... |" Grid.Row="9" FontFamily="Consolas" Grid.ColumnSpan="2"/>
-                            <TextBlock Text="   | ... ... ... ... |   | ... ... ... ... |   | ... ... ... ... |" Grid.Row="10" FontFamily="Consolas" Grid.ColumnSpan="2"/>
-                            <TextBlock Text="   | ... ... ... ... |   | ... ... ... ... |   | ... ... ... ... |" Grid.Row="11" FontFamily="Consolas" Grid.ColumnSpan="2"/>
+                            <TextBlock x:Name="txtTrPointG" FontFamily="Consolas" Grid.Row="5" Grid.Column="0"/>
+                            <TextBlock x:Name="txtTrPointH" FontFamily="Consolas" Grid.Row="5" Grid.Column="1"/>
+
+                            <TextBlock x:Name="txtTrLine" FontFamily="Consolas" Grid.Row="6" Grid.ColumnSpan="2"/>
+
+                            <TextBlock x:Name="txtTrMat0" FontFamily="Consolas" Grid.Row="7" Grid.ColumnSpan="2"/>
+                            <TextBlock x:Name="txtTrMat1" Grid.Row="8" FontFamily="Consolas" Grid.ColumnSpan="2"/>
+                            <TextBlock x:Name="txtTrMat2" Grid.Row="9" FontFamily="Consolas" Grid.ColumnSpan="2"/>
+                            <TextBlock x:Name="txtTrMat3" Grid.Row="10" FontFamily="Consolas" Grid.ColumnSpan="2"/>
+                            <TextBlock x:Name="txtTrMat4" Grid.Row="11" FontFamily="Consolas" Grid.ColumnSpan="2"/>
                         </Grid>
                     </GroupBox>
 
                     <Grid Grid.Row="1"  Grid.Column="2" Background="#093145"/>
-
                     <Grid Grid.Row="2"  Grid.ColumnSpan="3" Background="#093145"/>
                 </Grid>
 
