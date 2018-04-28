@@ -5,13 +5,75 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:_3D_Transformation"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
+        Title="MainWindow"  Width="1280" Height="800">
     <TabControl>
         <TabItem Header="Main Menu">
+            <Grid Background="#093145">
+                <Grid.RowDefinitions>
+                    <RowDefinition/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition/>
+                </Grid.RowDefinitions>
+
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition/>
+                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition/>
+                </Grid.ColumnDefinitions>
+
+                <Grid Grid.Row="0" Grid.ColumnSpan="3"/>
+                
+                <Grid Grid.Row="1" Grid.Column="0"/>
+
+                <Grid Grid.Row="1" Grid.Column="1">
+                    <Grid>
+                        <Grid.RowDefinitions>
+                            <RowDefinition/>
+                            <RowDefinition/>
+                        </Grid.RowDefinitions>
+
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition/>
+                            <ColumnDefinition Width="Auto"/>
+                            <ColumnDefinition/>
+                        </Grid.ColumnDefinitions>
+
+                        <TextBlock Text="Tugas Transformasi 3D" FontSize="64" Foreground="White" TextAlignment="Center" Grid.Row="0" Grid.ColumnSpan="3"/>
+                                                
+                        <GroupBox Header="Anggota Kelompok" FontSize="24" Foreground="White" Margin="2" Grid.Row="1" Grid.Column="1">
+                            <Grid>
+                                <Grid.RowDefinitions>
+                                    <RowDefinition/>
+                                    <RowDefinition/>
+                                    <RowDefinition/>
+                                    <RowDefinition/>
+                                </Grid.RowDefinitions>
+
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition/>
+                                    <ColumnDefinition/>
+                                </Grid.ColumnDefinitions>
+
+                                <TextBlock Text="Ibnu Akbar" FontSize="16" Foreground="White" TextAlignment="Left" Margin="4" Grid.Row="0" Grid.Column="0"/>
+                                <TextBlock Text="16/395399/TK/44691" FontSize="16" Foreground="White" TextAlignment="Right" Margin="4" Grid.Row="0" Grid.Column="1"/>
+                                <TextBlock Text="Krismanuel Pratama Putra" FontSize="16" Foreground="White" TextAlignment="Left" Margin="4" Grid.Row="1" Grid.Column="0"/>
+                                <TextBlock Text="16/395401/TK/44693" FontSize="16" Foreground="White" TextAlignment="Right" Margin="4" Grid.Row="1" Grid.Column="1"/>
+                                <TextBlock Text="Panji Riski Hernanda" FontSize="16" Foreground="White" TextAlignment="Left" Margin="4" Grid.Row="2" Grid.Column="0"/>
+                                <TextBlock Text="16/395414/TK/44706" FontSize="16" Foreground="White" TextAlignment="Right" Margin="4" Grid.Row="2" Grid.Column="1"/>
+                                <TextBlock Text="Yudit Adythia Putra" FontSize="16" Foreground="White" TextAlignment="Left" Margin="4" Grid.Row="3" Grid.Column="0"/>
+                                <TextBlock Text="16/395423/TK/44715" FontSize="16" Foreground="White" TextAlignment="Right" Margin="4" Grid.Row="3" Grid.Column="1"/>
+                            </Grid>
+                        </GroupBox>
+                    </Grid>
+                </Grid>
+                
+                <Grid Grid.Row="1" Grid.Column="2"/>
+                
+                <Grid Grid.Row="2" Grid.ColumnSpan="3"/>
+            </Grid>
         </TabItem>
-        
+
         <TabItem Header="Translation">
-            
         </TabItem>
     </TabControl>
 </Window>
