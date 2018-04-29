@@ -98,7 +98,7 @@
                 <Grid Margin="2" Grid.Row="0" Grid.Column="0" Background="AliceBlue">
                     <HelixToolkit:HelixViewport3D ModelUpDirection="0,0,1" ShowCoordinateSystem="True" ShowFrameRate="True">
                         <HelixToolkit:SunLight/>
-                        <ModelVisual3D x:Name="ModelVisual" Content="{Binding Model}"/>
+                        <ModelVisual3D x:Name="TrModelVisual" Content="{Binding Model}"/>
                         <HelixToolkit:GridLinesVisual3D MinorDistance="1" MajorDistance="5" Thickness="0.0125" Length="200" Width="200"/>
                     </HelixToolkit:HelixViewport3D>
                 </Grid>
@@ -153,7 +153,7 @@
 
                                 <TextBlock Text="Pilih Salah Satu Objek :" Margin="2" Grid.Row="0" Grid.ColumnSpan="2"/>
 
-                                <ComboBox x:Name="cbxTrObject" Margin="2" Grid.Row="1" Grid.ColumnSpan="2" SelectionChanged="ObjectSelection"/>
+                                <ComboBox x:Name="cbxTrObject" Margin="2" Grid.Row="1" Grid.ColumnSpan="2" SelectionChanged="TrObjectSelection"/>
 
                                 <TextBlock Text="Panjang (X) :" Margin="2" Grid.Row="2" Grid.Column="0"/>
                                 <TextBox x:Name="txtTrObjectLength" Text="1" TextAlignment="Center" MaxLength="2" Margin="2" Grid.Row="2" Grid.Column="1"/>
@@ -164,7 +164,7 @@
                                 <TextBlock Text="Tinggi (Z) :" Margin="2" Grid.Row="4" Grid.Column="0"/>
                                 <TextBox x:Name="txtTrObjectHeight" Text="1" TextAlignment="Center" MaxLength="2" Margin="2" Grid.Row="4" Grid.Column="1"/>
 
-                                <Button x:Name="btnSetObject" Content="Set Objek" Margin="2" Grid.Row="5" Grid.ColumnSpan="2" Click="Click_btnSetObject"/>
+                                <Button x:Name="btnTrSetObject" Content="Set Objek" Margin="2" Grid.Row="5" Grid.ColumnSpan="2" Click="Click_btnTrSetObject"/>
                             </Grid>
                         </GroupBox>
 
@@ -291,6 +291,233 @@
                             <TextBlock x:Name="txtTrMat2" Grid.Row="9" FontFamily="Consolas" Grid.ColumnSpan="2"/>
                             <TextBlock x:Name="txtTrMat3" Grid.Row="10" FontFamily="Consolas" Grid.ColumnSpan="2"/>
                             <TextBlock x:Name="txtTrMat4" Grid.Row="11" FontFamily="Consolas" Grid.ColumnSpan="2"/>
+                        </Grid>
+                    </GroupBox>
+
+                    <Grid Grid.Row="1"  Grid.Column="2" Background="#093145"/>
+                    <Grid Grid.Row="2"  Grid.ColumnSpan="3" Background="#093145"/>
+                </Grid>
+
+                <Grid Grid.Row="1" Grid.Column="1">
+                    <TextBlock Text="Copyright(c) KMKI 2018" FontFamily="Consolas" Foreground="White" FontSize="10" HorizontalAlignment="Right" VerticalAlignment="Bottom"/>
+                </Grid>
+            </Grid>
+        </TabItem>
+
+        <!--  _____  _____          _      _____ _   _  _____ -->
+        <!-- / ____|/ ____|   /\   | |    |_   _| \ | |/ ____|-->
+        <!--| (___ | |       /  \  | |      | | |  \| | |  __ -->
+        <!-- \___ \| |      / /\ \ | |      | | | . ` | | |_ |-->
+        <!-- ____) | |____ / ____ \| |____ _| |_| |\  | |__| |-->
+        <!--|_____/ \_____/_/    \_\______|_____|_| \_|\_____|-->
+        <TabItem Header="Scaling">
+            <Grid Background="#093145">
+                <Grid.RowDefinitions>
+                    <RowDefinition/>
+                    <RowDefinition Height="Auto"/>
+                </Grid.RowDefinitions>
+
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition/>
+                    <ColumnDefinition Width="Auto"/>
+                </Grid.ColumnDefinitions>
+
+                <Grid Margin="2" Grid.Row="0" Grid.Column="0" Background="AliceBlue">
+                    <HelixToolkit:HelixViewport3D ModelUpDirection="0,0,1" ShowCoordinateSystem="True" ShowFrameRate="True">
+                        <HelixToolkit:SunLight/>
+                        <ModelVisual3D x:Name="ScModelVisual" Content="{Binding Model}"/>
+                        <HelixToolkit:GridLinesVisual3D MinorDistance="1" MajorDistance="5" Thickness="0.0125" Length="200" Width="200"/>
+                    </HelixToolkit:HelixViewport3D>
+                </Grid>
+
+                <Grid Grid.Row="0" Grid.Column="1" Background="AliceBlue">
+                    <Grid.RowDefinitions>
+                        <RowDefinition/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition/>
+                    </Grid.RowDefinitions>
+
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition/>
+                        <ColumnDefinition Width="Auto"/>
+                        <ColumnDefinition/>
+                    </Grid.ColumnDefinitions>
+
+                    <Grid Grid.RowSpan="3" Grid.Column="0" Background="#093145"/>
+
+                    <Grid Grid.Row="0"  Grid.Column="1" Background="#093145"/>
+
+                    <Grid Grid.RowSpan="3" Grid.Column="2" Background="#093145"/>
+
+                    <Grid Grid.Row="1" Grid.Column="1">
+                        <Grid.RowDefinitions>
+                            <RowDefinition/>
+                            <RowDefinition/>
+                            <RowDefinition/>
+                            <RowDefinition/>
+                        </Grid.RowDefinitions>
+
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition/>
+                            <ColumnDefinition/>
+                        </Grid.ColumnDefinitions>
+
+                        <GroupBox Header="Objek" Margin="2" Grid.Row="0" Grid.ColumnSpan="2">
+                            <Grid>
+                                <Grid.RowDefinitions>
+                                    <RowDefinition/>
+                                    <RowDefinition/>
+                                    <RowDefinition/>
+                                    <RowDefinition/>
+                                    <RowDefinition/>
+                                    <RowDefinition/>
+                                </Grid.RowDefinitions>
+
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition/>
+                                    <ColumnDefinition/>
+                                </Grid.ColumnDefinitions>
+
+                                <TextBlock Text="Pilih Salah Satu Objek :" Margin="2" Grid.Row="0" Grid.ColumnSpan="2"/>
+
+                                <ComboBox x:Name="cbxScObject" Margin="2" Grid.Row="1" Grid.ColumnSpan="2" SelectionChanged="ScObjectSelection"/>
+
+                                <TextBlock Text="Panjang (X) :" Margin="2" Grid.Row="2" Grid.Column="0"/>
+                                <TextBox x:Name="txtScObjectLength" Text="1" TextAlignment="Center" MaxLength="2" Margin="2" Grid.Row="2" Grid.Column="1"/>
+                                
+                                <TextBlock Text="Lebar (Y) :" Margin="2" Grid.Row="3" Grid.Column="0"/>
+                                <TextBox x:Name="txtScObjectWidth" Text="1" TextAlignment="Center" MaxLength="2" Margin="2" Grid.Row="3" Grid.Column="1"/>
+                                
+                                <TextBlock Text="Tinggi (Z) :" Margin="2" Grid.Row="4" Grid.Column="0"/>
+                                <TextBox x:Name="txtScObjectHeight" Text="1" TextAlignment="Center" MaxLength="2" Margin="2" Grid.Row="4" Grid.Column="1"/>
+
+                                <Button x:Name="btnScSetObject" Content="Set Objek" Margin="2" Grid.Row="5" Grid.ColumnSpan="2" Click="Click_btnScSetObject"/>
+                            </Grid>
+                        </GroupBox>
+
+                        <GroupBox Header="Titik Awal" Margin="2" Grid.Row="1" Grid.ColumnSpan="2">
+                            <Grid>
+                                <Grid.RowDefinitions>
+                                    <RowDefinition/>
+                                    <RowDefinition/>
+                                </Grid.RowDefinitions>
+
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition/>
+                                    <ColumnDefinition/>
+                                    <ColumnDefinition/>
+                                    <ColumnDefinition/>
+                                    <ColumnDefinition/>
+                                    <ColumnDefinition/>
+                                </Grid.ColumnDefinitions>
+
+                                <TextBlock Text="X :" Margin="2" Grid.Row="0" Grid.Column="0"/>
+                                <TextBox x:Name="txtScOriginX" Text="0" TextAlignment="Center" MaxLength="2" Width="25" Margin="2" Grid.Row="0" Grid.Column="1"/>
+                                <TextBlock Text="Y :" Margin="2" Grid.Row="0" Grid.Column="2"/>
+                                <TextBox x:Name="txtScOriginY" Text="0" TextAlignment="Center" MaxLength="2" Width="25" Margin="2" Grid.Row="0" Grid.Column="3"/>
+                                <TextBlock Text="Z :" Margin="2" Grid.Row="0" Grid.Column="4"/>
+                                <TextBox x:Name="txtScOriginZ" Text="0" TextAlignment="Center" MaxLength="2" Width="25" Margin="2" Grid.Row="0" Grid.Column="5"/>
+
+                                <Button x:Name="btnScSetOrigin" Content="Set Titik Awal" Margin="2" Grid.Row="1" Grid.ColumnSpan="6" Click="Click_btnScSetOrigin"/>
+                            </Grid>
+                        </GroupBox>
+
+                        <GroupBox Header="Skala" Margin="2" Grid.Row="2" Grid.ColumnSpan="2">
+                            <Grid>
+                                <Grid.RowDefinitions>
+                                    <RowDefinition/>
+                                    <RowDefinition/>
+                                </Grid.RowDefinitions>
+
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition/>
+                                    <ColumnDefinition/>
+                                    <ColumnDefinition/>
+                                    <ColumnDefinition/>
+                                    <ColumnDefinition/>
+                                    <ColumnDefinition/>
+                                </Grid.ColumnDefinitions>
+
+                                <TextBlock Text="X :" Margin="2" Grid.Row="0" Grid.Column="0"/>
+                                <TextBox x:Name="txtScScaleX" Text="1" TextAlignment="Center" MaxLength="2" Width="25" Margin="2" Grid.Row="0" Grid.Column="1"/>
+                                <TextBlock Text="Y :" Margin="2" Grid.Row="0" Grid.Column="2"/>
+                                <TextBox x:Name="txtScScaleY" Text="1" TextAlignment="Center" MaxLength="2" Width="25" Margin="2" Grid.Row="0" Grid.Column="3"/>
+                                <TextBlock Text="Z :" Margin="2" Grid.Row="0" Grid.Column="4"/>
+                                <TextBox x:Name="txtScScaleZ" Text="1" TextAlignment="Center" MaxLength="2" Width="25" Margin="2" Grid.Row="0" Grid.Column="5"/>
+
+                                <Button x:Name="btnSetScale" Content="Set Skala" Margin="2" Grid.Row="1" Grid.ColumnSpan="6" Click="Click_btnSetScale"/>
+                            </Grid>
+                        </GroupBox>
+
+                        <Button x:Name="btnScale" Content="Scale" Margin="2" Grid.Row="3" Grid.Column="0" Click="Click_btnScale"/>
+                        <Button x:Name="btnScReset" Content="Reset" Margin="2" Grid.Row="3" Grid.Column="1" IsEnabled="False" Click="Click_btnScReset"/>
+                    </Grid>
+
+                    <Grid Grid.Row="2"  Grid.Column="1" Background="#093145"/>
+                </Grid>
+
+                <Grid Grid.Row="1" Grid.Column="0" Background="AliceBlue">
+                    <Grid.RowDefinitions>
+                        <RowDefinition/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition/>
+                    </Grid.RowDefinitions>
+
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition/>
+                        <ColumnDefinition Width="Auto"/>
+                        <ColumnDefinition/>
+                    </Grid.ColumnDefinitions>
+
+                    <Grid Grid.Row="0"  Grid.ColumnSpan="3" Background="#093145"/>
+
+                    <Grid Grid.Row="1"  Grid.Column="0" Background="#093145"/>
+
+                    <GroupBox Header="Matriks Transformasi" Margin="2" Grid.Row="1" Grid.Column="1">
+                        <Grid>
+                            <Grid.RowDefinitions>
+                                <RowDefinition/>
+                                <RowDefinition/>
+                                <RowDefinition/>
+                                <RowDefinition/>
+                                <RowDefinition/>
+                                <RowDefinition/>
+                                <RowDefinition/>
+                                <RowDefinition/>
+                                <RowDefinition/>
+                                <RowDefinition/>
+                                <RowDefinition/>
+                                <RowDefinition/>
+                            </Grid.RowDefinitions>
+
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition/>
+                                <ColumnDefinition/>
+                            </Grid.ColumnDefinitions>
+
+                            <TextBlock x:Name="txtScObjectDescription" FontFamily="Consolas" Grid.Row="0" Grid.ColumnSpan="2"/>
+
+                            <TextBlock x:Name="txtScaleDescription" FontFamily="Consolas" Grid.Row="1" Grid.ColumnSpan="2"/>
+
+                            <TextBlock x:Name="txtScPointA" FontFamily="Consolas" Grid.Row="2" Grid.Column="0"/>
+                            <TextBlock x:Name="txtScPointB" FontFamily="Consolas" Grid.Row="2" Grid.Column="1"/>
+
+                            <TextBlock x:Name="txtScPointC" FontFamily="Consolas" Grid.Row="3" Grid.Column="0"/>
+                            <TextBlock x:Name="txtScPointD" FontFamily="Consolas" Grid.Row="3" Grid.Column="1"/>
+
+                            <TextBlock x:Name="txtScPointE" FontFamily="Consolas" Grid.Row="4" Grid.Column="0"/>
+                            <TextBlock x:Name="txtScPointF" FontFamily="Consolas" Grid.Row="4" Grid.Column="1"/>
+
+                            <TextBlock x:Name="txtScPointG" FontFamily="Consolas" Grid.Row="5" Grid.Column="0"/>
+                            <TextBlock x:Name="txtScPointH" FontFamily="Consolas" Grid.Row="5" Grid.Column="1"/>
+
+                            <TextBlock x:Name="txtScLine" FontFamily="Consolas" Grid.Row="6" Grid.ColumnSpan="2"/>
+
+                            <TextBlock x:Name="txtScMat0" FontFamily="Consolas" Grid.Row="7" Grid.ColumnSpan="2"/>
+                            <TextBlock x:Name="txtScMat1" Grid.Row="8" FontFamily="Consolas" Grid.ColumnSpan="2"/>
+                            <TextBlock x:Name="txtScMat2" Grid.Row="9" FontFamily="Consolas" Grid.ColumnSpan="2"/>
+                            <TextBlock x:Name="txtScMat3" Grid.Row="10" FontFamily="Consolas" Grid.ColumnSpan="2"/>
+                            <TextBlock x:Name="txtScMat4" Grid.Row="11" FontFamily="Consolas" Grid.ColumnSpan="2"/>
                         </Grid>
                     </GroupBox>
 
