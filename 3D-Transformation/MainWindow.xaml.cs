@@ -71,11 +71,10 @@ namespace _3D_Transformation
             SetZeroMatrix(RoB);
             SetZeroMatrix(RoC);
             SetZeroMatrix(RoD);
-            SetZeroMatrix(RoF);
+            SetZeroMatrix(RoE);
             SetZeroMatrix(RoM);
             SetZeroMatrix(RoY);
-            RoObjectList();
-            RoSumbuPutarList();
+            RoObjectList();            
             RoDisableAllInput();
             RoDrawCartesianAxis();
         }
@@ -859,10 +858,26 @@ namespace _3D_Transformation
         public void RoDrawObjectOrigin()
         {
             var meshBuilder = new MeshBuilder(false, false);
-            meshBuilder.AddBox(new Rect3D(RoX[0, 0], RoX[1, 0], RoX[2, 0], Int32.Parse(txtRoObjectLength.Text), Int32.Parse(txtRoObjectWidth.Text), Int32.Parse(txtRoObjectHeight.Text)));
+            
+            meshBuilder.AddPipe(new Point3D(RoX[0, 0], RoX[1, 0], RoX[2, 0]), new Point3D(RoX[0, 1], RoX[1, 1], RoX[2, 1]), 0, 0.2, 360);
+            meshBuilder.AddPipe(new Point3D(RoX[0, 0], RoX[1, 0], RoX[2, 0]), new Point3D(RoX[0, 3], RoX[1, 3], RoX[2, 3]), 0, 0.2, 360);
+            meshBuilder.AddPipe(new Point3D(RoX[0, 2], RoX[1, 2], RoX[2, 2]), new Point3D(RoX[0, 1], RoX[1, 1], RoX[2, 1]), 0, 0.2, 360);
+            meshBuilder.AddPipe(new Point3D(RoX[0, 2], RoX[1, 2], RoX[2, 2]), new Point3D(RoX[0, 3], RoX[1, 3], RoX[2, 3]), 0, 0.2, 360);
+
+            if (cbxRoObject.SelectedIndex == 1)
+            {
+                meshBuilder.AddPipe(new Point3D(RoX[0, 4], RoX[1, 4], RoX[2, 4]), new Point3D(RoX[0, 5], RoX[1, 5], RoX[2, 5]), 0, 0.2, 360);
+                meshBuilder.AddPipe(new Point3D(RoX[0, 4], RoX[1, 4], RoX[2, 4]), new Point3D(RoX[0, 7], RoX[1, 7], RoX[2, 7]), 0, 0.2, 360);
+                meshBuilder.AddPipe(new Point3D(RoX[0, 6], RoX[1, 6], RoX[2, 6]), new Point3D(RoX[0, 5], RoX[1, 5], RoX[2, 5]), 0, 0.2, 360);
+                meshBuilder.AddPipe(new Point3D(RoX[0, 6], RoX[1, 6], RoX[2, 6]), new Point3D(RoX[0, 7], RoX[1, 7], RoX[2, 7]), 0, 0.2, 360);
+            
+                meshBuilder.AddPipe(new Point3D(RoX[0, 0], RoX[1, 0], RoX[2, 0]), new Point3D(RoX[0, 4], RoX[1, 4], RoX[2, 4]), 0, 0.2, 360);
+                meshBuilder.AddPipe(new Point3D(RoX[0, 1], RoX[1, 1], RoX[2, 1]), new Point3D(RoX[0, 5], RoX[1, 5], RoX[2, 5]), 0, 0.2, 360);
+                meshBuilder.AddPipe(new Point3D(RoX[0, 2], RoX[1, 2], RoX[2, 2]), new Point3D(RoX[0, 6], RoX[1, 6], RoX[2, 6]), 0, 0.2, 360);
+                meshBuilder.AddPipe(new Point3D(RoX[0, 3], RoX[1, 3], RoX[2, 3]), new Point3D(RoX[0, 7], RoX[1, 7], RoX[2, 7]), 0, 0.2, 360);
+            }
 
             var mesh = meshBuilder.ToMesh(true);
-
             var blueMaterial = MaterialHelper.CreateMaterial(Colors.Blue);
 
             rotationModelGroup.Children.Add(new GeometryModel3D
@@ -872,10 +887,37 @@ namespace _3D_Transformation
             });
         }
 
+        private void RoDrawRotationAxis()
+        {
+            var axisBuilder = new MeshBuilder(false, false);
+            if (cbxSumbuPutar.SelectedIndex == 0)
+            {
+                axisBuilder.AddPipe(new Point3D(-100, Int32.Parse(txtRoOriginY.Text), Int32.Parse(txtRoOriginZ.Text)), new Point3D(100, Int32.Parse(txtRoOriginY.Text), Int32.Parse(txtRoOriginZ.Text)), 0, 0.2, 360);
+            }
+
+            if (cbxSumbuPutar.SelectedIndex == 1)
+            {
+                axisBuilder.AddPipe(new Point3D(Int32.Parse(txtRoOriginX.Text), -100, Int32.Parse(txtRoOriginZ.Text)), new Point3D(Int32.Parse(txtRoOriginX.Text), 100, Int32.Parse(txtRoOriginZ.Text)), 0, 0.2, 360);
+            }
+
+            if (cbxSumbuPutar.SelectedIndex == 2)
+            {
+                axisBuilder.AddPipe(new Point3D(Int32.Parse(txtRoOriginX.Text), Int32.Parse(txtRoOriginY.Text), -100), new Point3D(Int32.Parse(txtRoOriginX.Text), Int32.Parse(txtRoOriginY.Text), 100), 0, 0.2, 360);
+            }                        
+
+            var mesh = axisBuilder.ToMesh(true);
+            var material = MaterialHelper.CreateMaterial(Colors.Green);
+            rotationModelGroup.Children.Add(new GeometryModel3D
+            {
+                Geometry = mesh,
+                Material = material
+            });
+            RoModelVisual.Content = rotationModelGroup;
+        }
+
         public void RoDrawObjectDestination()
         {
-            var meshBuilder = new MeshBuilder(false, false);
-            var redMaterial = MaterialHelper.CreateMaterial(Colors.Red);            
+            var meshBuilder = new MeshBuilder(false, false);                        
 
             meshBuilder.AddPipe(new Point3D(RoY[0, 0], RoY[1, 0], RoY[2, 0]), new Point3D(RoY[0, 1], RoY[1, 1], RoY[2, 1]), 0, 0.2, 360);            
             meshBuilder.AddPipe(new Point3D(RoY[0, 0], RoY[1, 0], RoY[2, 0]), new Point3D(RoY[0, 3], RoY[1, 3], RoY[2, 3]), 0, 0.2, 360);            
@@ -896,8 +938,13 @@ namespace _3D_Transformation
             }
 
             var mesh = meshBuilder.ToMesh(true);
-            rotationModelGroup.Children.Add(new GeometryModel3D { Geometry = mesh, Material = redMaterial });
-            RoModelVisual.Content = rotationModelGroup;
+            var redMaterial = MaterialHelper.CreateMaterial(Colors.Red);
+
+            rotationModelGroup.Children.Add(new GeometryModel3D
+            {
+                Geometry = mesh,
+                Material = redMaterial
+            });            
         }
 
         private void RoObjectList()
@@ -962,9 +1009,14 @@ namespace _3D_Transformation
 
         private void RoSumbuPutarList()
         {
-            cbxSumbuPutar.Items.Add("Sumbu X");
-            cbxSumbuPutar.Items.Add("Sumbu Y");
-            cbxSumbuPutar.Items.Add("Sumbu Z");
+            cbxSumbuPutar.Items.Clear();
+
+            cbxSumbuPutar.Items.Add("Garis AB");
+            cbxSumbuPutar.Items.Add("Garis AD");
+            if (cbxRoObject.SelectedIndex == 1)
+            {
+                cbxSumbuPutar.Items.Add("Garis AE");
+            }            
         }
 
         private void RoObjectSelection(object sender, SelectionChangedEventArgs e)
@@ -993,6 +1045,8 @@ namespace _3D_Transformation
                 txtRoPointH.Visibility = Visibility.Visible;
             }
 
+            RoSumbuPutarList();
+
             txtRoObjectLength.IsEnabled = true;
             txtRoObjectWidth.IsEnabled = true;
             btnRoSetObject.IsEnabled = true;
@@ -1002,11 +1056,15 @@ namespace _3D_Transformation
             txtRoOriginZ.IsEnabled = true;
             btnRoSetOrigin.IsEnabled = true;
 
-            cbxSumbuPutar.IsEnabled = true;
-            txtSudutPutar.IsEnabled = true;
-            btnRoSetRotation.IsEnabled = true;
+            cbxSumbuPutar.IsEnabled = true;           
 
             btnRotate.IsEnabled = true;
+        }
+
+        private void SelectionChanged_cbxSumbuPutar(object sender, SelectionChangedEventArgs e)
+        {
+            txtSudutPutar.IsEnabled = true;
+            btnRoSetRotation.IsEnabled = true;
         }
 
         private void Click_btnRoSetObject(object sender, RoutedEventArgs e)
@@ -1120,6 +1178,8 @@ namespace _3D_Transformation
 
         private void Click_btnSetRotation(object sender, RoutedEventArgs e)
         {
+            btnRoSetRotation.IsEnabled = false;
+
             double sudutPutar = Int32.Parse(txtSudutPutar.Text) * (Math.PI / 180);
 
             cbxSumbuPutar.IsEnabled = false;
@@ -1159,7 +1219,7 @@ namespace _3D_Transformation
             txtRotateDescription.Text = String.Format("   akan dirotasi {0} derajat dengan {1} sebagai sumbu putar",
                                                          txtSudutPutar.Text, cbxSumbuPutar.SelectedItem.ToString().ToLower());
 
-            RoDrawObjectDestination();
+            RoDrawRotationAxis();            
         }
 
         private void InitializeMatrix()
@@ -1177,8 +1237,8 @@ namespace _3D_Transformation
 
         private void Click_btnRotate(object sender, RoutedEventArgs e)
         {
-            btnTranslate.IsEnabled = false;
-            btnTrReset.IsEnabled = true;
+            btnRotate.IsEnabled = false;
+            btnRoReset.IsEnabled = true;
 
             InitializeMatrix();            
             MultiplyMatrix(RoD, RoC, RoX);
@@ -1194,19 +1254,19 @@ namespace _3D_Transformation
             }
 
             txtRoMat0.Text = "-> [T'] * [R] * [T]";
-            txtRoMat1.Text = String.Format("   | {0,3} {1,3} {2,3} {3,3} |   | {4,4} {5,4} {6,4} {7,4} |   | {8,3} {9,3} {10,3} {11,3} |",
+            txtRoMat1.Text = String.Format("   | {0,3} {1,3} {2,3} {3,3} |   | {4,5} {5,5} {6,5} {7,5} |   | {8,3} {9,3} {10,3} {11,3} |",
                                             RoF[0, 0], RoF[0, 1], RoF[0, 2], RoF[0, 3],
                                             RoF[0, 4], RoF[0, 5], RoF[0, 6], RoF[0, 7],
                                             RoF[0, 8], RoF[0, 9], RoF[0, 10], RoF[0, 11]);
-            txtRoMat2.Text = String.Format("   | {0,3} {1,3} {2,3} {3,3} |   | {4,4} {5,4} {6,4} {7,4} |   | {8,3} {9,3} {10,3} {11,3} |",
+            txtRoMat2.Text = String.Format("   | {0,3} {1,3} {2,3} {3,3} |   | {4,5} {5,5} {6,5} {7,5} |   | {8,3} {9,3} {10,3} {11,3} |",
                                             RoF[1, 0], RoF[1, 1], RoF[1, 2], RoF[1, 3],
                                             RoF[1, 4], RoF[1, 5], RoF[1, 6], RoF[1, 7],
                                             RoF[1, 8], RoF[1, 9], RoF[1, 10], RoF[1, 11]);
-            txtRoMat3.Text = String.Format("   | {0,3} {1,3} {2,3} {3,3} |   | {4,4} {5,4} {6,4} {7,4} |   | {8,3} {9,3} {10,3} {11,3} |",                                               
+            txtRoMat3.Text = String.Format("   | {0,3} {1,3} {2,3} {3,3} |   | {4,5} {5,5} {6,5} {7,5} |   | {8,3} {9,3} {10,3} {11,3} |",                                               
                                             RoF[2, 0], RoF[2, 1], RoF[2, 2], RoF[2, 3],
                                             RoF[2, 4], RoF[2, 5], RoF[2, 6], RoF[2, 7],
                                             RoF[2, 8], RoF[2, 9], RoF[2, 10], RoF[2, 11]);
-            txtRoMat4.Text = String.Format("   | {0,3} {1,3} {2,3} {3,3} |   | {4,4} {5,4} {6,4} {7,4} |   | {8,3} {9,3} {10,3} {11,3} |",
+            txtRoMat4.Text = String.Format("   | {0,3} {1,3} {2,3} {3,3} |   | {4,5} {5,5} {6,5} {7,5} |   | {8,3} {9,3} {10,3} {11,3} |",
                                             RoF[3, 0], RoF[3, 1], RoF[3, 2], RoF[3, 3],
                                             RoF[3, 4], RoF[3, 5], RoF[3, 6], RoF[3, 7],
                                             RoF[3, 8], RoF[3, 9], RoF[3, 10], RoF[3, 11]);                                                         
@@ -1218,26 +1278,30 @@ namespace _3D_Transformation
 
         private void Click_btnRoReset(object sender, RoutedEventArgs e)
         {
-            cbxTrObject.IsEnabled = true;
+            cbxRoObject.IsEnabled = true;
 
-            SetZeroMatrix(TrX);
-            SetZeroMatrix(TrF);
-            SetZeroMatrix(TrY);
+            SetZeroMatrix(RoX);
+            SetZeroMatrix(RoA);
+            SetZeroMatrix(RoB);
+            SetZeroMatrix(RoC);
+            SetZeroMatrix(RoD);
+            SetZeroMatrix(RoE);
+            SetZeroMatrix(RoF);
+            SetZeroMatrix(RoM);
+            SetZeroMatrix(RoY);
 
-            txtTrObjectLength.Text = "1";
-            txtTrObjectWidth.Text = "1";
-            txtTrObjectHeight.Text = "0";
+            txtRoObjectLength.Text = "1";
+            txtRoObjectWidth.Text = "1";
+            txtRoObjectHeight.Text = "0";
 
-            txtTrOriginX.Text = "0";
-            txtTrOriginY.Text = "0";
-            txtTrOriginZ.Text = "0";
+            txtRoOriginX.Text = "0";
+            txtRoOriginY.Text = "0";
+            txtRoOriginZ.Text = "0";
 
-            txtTrMovementX.Text = "0";
-            txtTrMovementY.Text = "0";
-            txtTrMovementZ.Text = "0";
+            txtSudutPutar.Text = "0";
 
-            translationModelGroup.Children.Clear();
-            TrDrawCartesianAxis();
+            rotationModelGroup.Children.Clear();
+            RoDrawCartesianAxis();
         }
 
         //Shearing

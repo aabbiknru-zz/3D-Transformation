@@ -655,12 +655,12 @@
                                     <ColumnDefinition/>
                                 </Grid.ColumnDefinitions>
 
-                                <ComboBox x:Name="cbxSumbuPutar" Margin="2" Grid.Row="0" Grid.ColumnSpan="2"/>
+                                <ComboBox x:Name="cbxSumbuPutar" Margin="2" Grid.Row="0" Grid.ColumnSpan="2" SelectionChanged="SelectionChanged_cbxSumbuPutar"/>
                                 
                                 <TextBlock Text="Sudut Putar :" Margin="2" Grid.Row="1" Grid.Column="0"/>
                                 <TextBox x:Name="txtSudutPutar" Text="0" TextAlignment="Center" MaxLength="2" Margin="2" Grid.Row="1" Grid.Column="1"/>
 
-                                <Button x:Name="btnRoSetRotation" Content="Set Sudut Putar" Margin="2" Grid.Row="2" Grid.ColumnSpan="6" Click="Click_btnSetRotation"/>
+                                <Button x:Name="btnRoSetRotation" Content="Set Sumbu Putar" Margin="2" Grid.Row="2" Grid.ColumnSpan="6" Click="Click_btnSetRotation"/>
                             </Grid>
                         </GroupBox>
 
