@@ -45,7 +45,7 @@ namespace _3D_Transformation
         private double[,] RoY = new double[4, 8];
 
         private int[,] ShX = new int[4, 8];
-        private int[,] ShF = new int[4, 12];
+        private int[,] ShF = new int[4, 4];
         private int[,] ShY = new int[4, 8];
 
         public MainWindow()
@@ -77,6 +77,13 @@ namespace _3D_Transformation
             RoObjectList();            
             RoDisableAllInput();
             RoDrawCartesianAxis();
+
+            SetZeroMatrix(ShX);
+            SetZeroMatrix(ShF);
+            SetZeroMatrix(ShY);
+            ShObjectList();
+            ShDisableAllInput();
+            ShDrawCartesianAxis();
         }
 
         private void SetZeroMatrix(int[,] matrix)
@@ -156,7 +163,7 @@ namespace _3D_Transformation
 
         public void TrDrawObjectOrigin()
         {
-            var meshBuilder = new MeshBuilder(false, false);            
+            var meshBuilder = new MeshBuilder(false, false);
             meshBuilder.AddBox(new Rect3D(TrX[0, 0], TrX[1, 0], TrX[2, 0], Int32.Parse(txtTrObjectLength.Text), Int32.Parse(txtTrObjectWidth.Text), Int32.Parse(txtTrObjectHeight.Text)));
 
             var mesh = meshBuilder.ToMesh(true);
@@ -193,7 +200,7 @@ namespace _3D_Transformation
         }
 
         private void TrDisableAllInput()
-        {
+        {            
             txtTrObjectLength.IsEnabled = false;
             txtTrObjectWidth.IsEnabled = false;
             txtTrObjectHeight.IsEnabled = false;
@@ -864,6 +871,11 @@ namespace _3D_Transformation
             meshBuilder.AddPipe(new Point3D(RoX[0, 2], RoX[1, 2], RoX[2, 2]), new Point3D(RoX[0, 1], RoX[1, 1], RoX[2, 1]), 0, 0.2, 360);
             meshBuilder.AddPipe(new Point3D(RoX[0, 2], RoX[1, 2], RoX[2, 2]), new Point3D(RoX[0, 3], RoX[1, 3], RoX[2, 3]), 0, 0.2, 360);
 
+            /*meshBuilder.AddSphere(new Point3D(RoX[0, 0], RoX[1, 0], RoX[2, 0]), 0.1, 360, 360);
+            meshBuilder.AddSphere(new Point3D(RoX[0, 1], RoX[1, 1], RoX[2, 1]), 0.1, 360, 360);
+            meshBuilder.AddSphere(new Point3D(RoX[0, 2], RoX[1, 2], RoX[2, 2]), 0.1, 360, 360);            
+            meshBuilder.AddSphere(new Point3D(RoX[0, 3], RoX[1, 3], RoX[2, 3]), 0.1, 360, 360);*/
+
             if (cbxRoObject.SelectedIndex == 1)
             {
                 meshBuilder.AddPipe(new Point3D(RoX[0, 4], RoX[1, 4], RoX[2, 4]), new Point3D(RoX[0, 5], RoX[1, 5], RoX[2, 5]), 0, 0.2, 360);
@@ -875,6 +887,11 @@ namespace _3D_Transformation
                 meshBuilder.AddPipe(new Point3D(RoX[0, 1], RoX[1, 1], RoX[2, 1]), new Point3D(RoX[0, 5], RoX[1, 5], RoX[2, 5]), 0, 0.2, 360);
                 meshBuilder.AddPipe(new Point3D(RoX[0, 2], RoX[1, 2], RoX[2, 2]), new Point3D(RoX[0, 6], RoX[1, 6], RoX[2, 6]), 0, 0.2, 360);
                 meshBuilder.AddPipe(new Point3D(RoX[0, 3], RoX[1, 3], RoX[2, 3]), new Point3D(RoX[0, 7], RoX[1, 7], RoX[2, 7]), 0, 0.2, 360);
+
+                /*meshBuilder.AddSphere(new Point3D(RoX[0, 4], RoX[1, 4], RoX[2, 4]), 0.1, 360, 360);
+                meshBuilder.AddSphere(new Point3D(RoX[0, 5], RoX[1, 5], RoX[2, 5]), 0.1, 360, 360);
+                meshBuilder.AddSphere(new Point3D(RoX[0, 6], RoX[1, 6], RoX[2, 6]), 0.1, 360, 360);
+                meshBuilder.AddSphere(new Point3D(RoX[0, 7], RoX[1, 7], RoX[2, 7]), 0.1, 360, 360);*/
             }
 
             var mesh = meshBuilder.ToMesh(true);
@@ -1305,5 +1322,396 @@ namespace _3D_Transformation
         }
 
         //Shearing
+
+        private void ShDrawCartesianAxis()
+        {
+            var axisBuilder = new MeshBuilder(true, true, true);
+            axisBuilder.AddPipe(new Point3D(-100, 0, 0), new Point3D(100, 0, 0), 0, 0.1, 360);
+            axisBuilder.AddPipe(new Point3D(0, -100, 0), new Point3D(0, 100, 0), 0, 0.1, 360);
+            axisBuilder.AddPipe(new Point3D(0, 0, -100), new Point3D(0, 0, 100), 0, 0.1, 360);
+
+            var mesh = axisBuilder.ToMesh(true);
+            var material = MaterialHelper.CreateMaterial(Colors.Gray);
+            shearingModelGroup.Children.Add(new GeometryModel3D
+            {
+                Geometry = mesh,
+                Material = material
+            });
+            ShModelVisual.Content = translationModelGroup;
+        }
+
+        public void ShDrawObjectOrigin()
+        {
+            var meshBuilder = new MeshBuilder(false, false);
+
+            meshBuilder.AddPipe(new Point3D(ShX[0, 0], ShX[1, 0], ShX[2, 0]), new Point3D(ShX[0, 1], ShX[1, 1], ShX[2, 1]), 0, 0.2, 360);
+            meshBuilder.AddPipe(new Point3D(ShX[0, 0], ShX[1, 0], ShX[2, 0]), new Point3D(ShX[0, 3], ShX[1, 3], ShX[2, 3]), 0, 0.2, 360);
+            meshBuilder.AddPipe(new Point3D(ShX[0, 2], ShX[1, 2], ShX[2, 2]), new Point3D(ShX[0, 1], ShX[1, 1], ShX[2, 1]), 0, 0.2, 360);
+            meshBuilder.AddPipe(new Point3D(ShX[0, 2], ShX[1, 2], ShX[2, 2]), new Point3D(ShX[0, 3], ShX[1, 3], ShX[2, 3]), 0, 0.2, 360);
+
+            if (cbxShObject.SelectedIndex == 1)
+            {
+                meshBuilder.AddPipe(new Point3D(ShX[0, 4], ShX[1, 4], ShX[2, 4]), new Point3D(ShX[0, 5], ShX[1, 5], ShX[2, 5]), 0, 0.2, 360);
+                meshBuilder.AddPipe(new Point3D(ShX[0, 4], ShX[1, 4], ShX[2, 4]), new Point3D(ShX[0, 7], ShX[1, 7], ShX[2, 7]), 0, 0.2, 360);
+                meshBuilder.AddPipe(new Point3D(ShX[0, 6], ShX[1, 6], ShX[2, 6]), new Point3D(ShX[0, 5], ShX[1, 5], ShX[2, 5]), 0, 0.2, 360);
+                meshBuilder.AddPipe(new Point3D(ShX[0, 6], ShX[1, 6], ShX[2, 6]), new Point3D(ShX[0, 7], ShX[1, 7], ShX[2, 7]), 0, 0.2, 360);
+
+                meshBuilder.AddPipe(new Point3D(ShX[0, 0], ShX[1, 0], ShX[2, 0]), new Point3D(ShX[0, 4], ShX[1, 4], ShX[2, 4]), 0, 0.2, 360);
+                meshBuilder.AddPipe(new Point3D(ShX[0, 1], ShX[1, 1], ShX[2, 1]), new Point3D(ShX[0, 5], ShX[1, 5], ShX[2, 5]), 0, 0.2, 360);
+                meshBuilder.AddPipe(new Point3D(ShX[0, 2], ShX[1, 2], ShX[2, 2]), new Point3D(ShX[0, 6], ShX[1, 6], ShX[2, 6]), 0, 0.2, 360);
+                meshBuilder.AddPipe(new Point3D(ShX[0, 3], ShX[1, 3], ShX[2, 3]), new Point3D(ShX[0, 7], ShX[1, 7], ShX[2, 7]), 0, 0.2, 360);
+            }
+
+            var mesh = meshBuilder.ToMesh(true);
+
+            var blueMaterial = MaterialHelper.CreateMaterial(Colors.Blue);
+
+            translationModelGroup.Children.Add(new GeometryModel3D
+            {
+                Geometry = mesh,
+                Material = blueMaterial
+            });
+        }
+
+        public void ShDrawObjectDestination()
+        {
+            var meshBuilder = new MeshBuilder(false, false);
+
+            meshBuilder.AddPipe(new Point3D(ShY[0, 0], ShY[1, 0], ShY[2, 0]), new Point3D(ShY[0, 1], ShY[1, 1], ShY[2, 1]), 0, 0.2, 360);
+            meshBuilder.AddPipe(new Point3D(ShY[0, 0], ShY[1, 0], ShY[2, 0]), new Point3D(ShY[0, 3], ShY[1, 3], ShY[2, 3]), 0, 0.2, 360);
+            meshBuilder.AddPipe(new Point3D(ShY[0, 2], ShY[1, 2], ShY[2, 2]), new Point3D(ShY[0, 1], ShY[1, 1], ShY[2, 1]), 0, 0.2, 360);
+            meshBuilder.AddPipe(new Point3D(ShY[0, 2], ShY[1, 2], ShY[2, 2]), new Point3D(ShY[0, 3], ShY[1, 3], ShY[2, 3]), 0, 0.2, 360);
+
+            if (cbxShObject.SelectedIndex == 1)
+            {
+                meshBuilder.AddPipe(new Point3D(ShY[0, 4], ShY[1, 4], ShY[2, 4]), new Point3D(ShY[0, 5], ShY[1, 5], ShY[2, 5]), 0, 0.2, 360);
+                meshBuilder.AddPipe(new Point3D(ShY[0, 4], ShY[1, 4], ShY[2, 4]), new Point3D(ShY[0, 7], ShY[1, 7], ShY[2, 7]), 0, 0.2, 360);
+                meshBuilder.AddPipe(new Point3D(ShY[0, 6], ShY[1, 6], ShY[2, 6]), new Point3D(ShY[0, 5], ShY[1, 5], ShY[2, 5]), 0, 0.2, 360);
+                meshBuilder.AddPipe(new Point3D(ShY[0, 6], ShY[1, 6], ShY[2, 6]), new Point3D(ShY[0, 7], ShY[1, 7], ShY[2, 7]), 0, 0.2, 360);
+
+                meshBuilder.AddPipe(new Point3D(ShY[0, 0], ShY[1, 0], ShY[2, 0]), new Point3D(ShY[0, 4], ShY[1, 4], ShY[2, 4]), 0, 0.2, 360);
+                meshBuilder.AddPipe(new Point3D(ShY[0, 1], ShY[1, 1], ShY[2, 1]), new Point3D(ShY[0, 5], ShY[1, 5], ShY[2, 5]), 0, 0.2, 360);
+                meshBuilder.AddPipe(new Point3D(ShY[0, 2], ShY[1, 2], ShY[2, 2]), new Point3D(ShY[0, 6], ShY[1, 6], ShY[2, 6]), 0, 0.2, 360);
+                meshBuilder.AddPipe(new Point3D(ShY[0, 3], ShY[1, 3], ShY[2, 3]), new Point3D(ShY[0, 7], ShY[1, 7], ShY[2, 7]), 0, 0.2, 360);
+            }
+
+            var mesh = meshBuilder.ToMesh(true);
+
+            var redMaterial = MaterialHelper.CreateMaterial(Colors.Red);
+
+            translationModelGroup.Children.Add(new GeometryModel3D
+            {
+                Geometry = mesh,
+                Material = redMaterial
+            });
+        }
+
+        private void ShObjectList()
+        {
+            cbxShObject.Items.Add("Persegi Panjang");
+            cbxShObject.Items.Add("Balok");
+        }
+
+        private void ShDisableAllInput()
+        {
+            txtShObjectLength.IsEnabled = false;
+            txtShObjectWidth.IsEnabled = false;
+            txtShObjectHeight.IsEnabled = false;
+            btnShSetObject.IsEnabled = false;
+
+            txtShOriginX.IsEnabled = false;
+            txtShOriginY.IsEnabled = false;
+            txtShOriginZ.IsEnabled = false;
+            btnShSetOrigin.IsEnabled = false;
+
+            txtShXY.IsEnabled = false;
+            txtShXZ.IsEnabled = false;
+            txtShYX.IsEnabled = false;
+            txtShYZ.IsEnabled = false;
+            txtShZX.IsEnabled = false;
+            txtShZY.IsEnabled = false;
+            btnSetShear.IsEnabled = false;
+
+            btnShear.IsEnabled = false;
+        }
+
+        private void ShLineSeparator()
+        {
+            txtShLine.Text = String.Empty;
+
+            if (cbxShObject.SelectedIndex == 0)
+            {
+                for (int i = 0; i < txtShearDescription.Text.Length; i++)
+                {
+                    if (i == 0 || i == txtShearDescription.Text.Length - 1)
+                    {
+                        txtShLine.Text += "+";
+                    }
+                    else
+                    {
+                        txtShLine.Text += "-";
+                    }
+                }
+            }
+
+            if (cbxShObject.SelectedIndex == 1)
+            {
+                for (int i = 0; i < txtShMat1.Text.Length; i++)
+                {
+                    if (i == 0 || i == txtShMat1.Text.Length - 1)
+                    {
+                        txtShLine.Text += "+";
+                    }
+                    else
+                    {
+                        txtShLine.Text += "-";
+                    }
+                }
+            }
+        }
+
+        private void ShObjectSelection(object sender, SelectionChangedEventArgs e)
+        {
+            cbxShObject.IsEnabled = false;
+
+
+            if (cbxShObject.SelectedIndex == 0)
+            {
+                txtShObjectHeight.Text = "0";
+                txtShObjectHeight.IsEnabled = false;
+
+                txtShPointE.Visibility = Visibility.Hidden;
+                txtShPointF.Visibility = Visibility.Hidden;
+                txtShPointG.Visibility = Visibility.Hidden;
+                txtShPointH.Visibility = Visibility.Hidden;
+            }
+
+            if (cbxShObject.SelectedIndex == 1)
+            {
+                txtShObjectHeight.Text = "1";
+                txtShObjectHeight.IsEnabled = true;
+
+                txtShPointE.Visibility = Visibility.Visible;
+                txtShPointF.Visibility = Visibility.Visible;
+                txtShPointG.Visibility = Visibility.Visible;
+                txtShPointH.Visibility = Visibility.Visible;
+            }
+
+            txtShObjectLength.IsEnabled = true;
+            txtShObjectWidth.IsEnabled = true;
+            btnShSetObject.IsEnabled = true;
+
+            txtShOriginX.IsEnabled = true;
+            txtShOriginY.IsEnabled = true;
+            txtShOriginZ.IsEnabled = true;
+            btnShSetOrigin.IsEnabled = true;
+
+            txtShXY.IsEnabled = true;
+            txtShXZ.IsEnabled = true;
+            txtShYX.IsEnabled = true;
+            txtShYZ.IsEnabled = true;
+            txtShZX.IsEnabled = true;
+            txtShZY.IsEnabled = true;
+            btnSetShear.IsEnabled = true;
+
+            btnShear.IsEnabled = true;
+        }
+
+        private void Click_btnShSetObject(object sender, RoutedEventArgs e)
+        {
+            txtShObjectLength.IsEnabled = false;
+            txtShObjectWidth.IsEnabled = false;
+            txtShObjectHeight.IsEnabled = false;
+            btnShSetObject.IsEnabled = false;
+
+            if (cbxShObject.SelectedIndex == 0)
+            {
+                txtShObjectDescription.Text = String.Format("-> Persegi Panjang ABCD dengan panjang {0} dan lebar {1}",
+                                                            txtShObjectLength.Text, txtTrObjectWidth.Text);
+            }
+
+            if (cbxShObject.SelectedIndex == 1)
+            {
+                txtShObjectDescription.Text = String.Format("-> Balok ABCD.EFGH dengan panjang {0}, lebar {1}, dan tinggi {2}",
+                                                            txtShObjectLength.Text, txtTrObjectWidth.Text, txtTrObjectHeight.Text);
+            }
+        }
+
+        private void Click_btnShSetOrigin(object sender, RoutedEventArgs e)
+        {
+            txtShOriginX.IsEnabled = false;
+            txtShOriginY.IsEnabled = false;
+            txtShOriginZ.IsEnabled = false;
+            btnShSetOrigin.IsEnabled = false;
+
+            ShX[0, 0] = Int32.Parse(txtShOriginX.Text);
+            ShX[1, 0] = Int32.Parse(txtShOriginY.Text);
+            ShX[2, 0] = Int32.Parse(txtShOriginZ.Text);
+            ShX[3, 0] = 1;
+
+            ShX[0, 1] = Int32.Parse(txtShOriginX.Text) + Int32.Parse(txtShObjectLength.Text);
+            ShX[1, 1] = Int32.Parse(txtShOriginY.Text);
+            ShX[2, 1] = Int32.Parse(txtShOriginZ.Text);
+            ShX[3, 1] = 1;
+
+            ShX[0, 2] = Int32.Parse(txtShOriginX.Text) + Int32.Parse(txtShObjectLength.Text);
+            ShX[1, 2] = Int32.Parse(txtShOriginY.Text) + Int32.Parse(txtShObjectWidth.Text);
+            ShX[2, 2] = Int32.Parse(txtShOriginZ.Text);
+            ShX[3, 2] = 1;
+
+            ShX[0, 3] = Int32.Parse(txtShOriginX.Text);
+            ShX[1, 3] = Int32.Parse(txtShOriginY.Text) + Int32.Parse(txtShObjectWidth.Text);
+            ShX[2, 3] = Int32.Parse(txtShOriginZ.Text);
+            ShX[3, 3] = 1;
+
+            ShX[0, 4] = Int32.Parse(txtShOriginX.Text);
+            ShX[1, 4] = Int32.Parse(txtShOriginY.Text);
+            ShX[2, 4] = Int32.Parse(txtShOriginZ.Text) + Int32.Parse(txtShObjectHeight.Text);
+            ShX[3, 4] = 1;
+
+            ShX[0, 5] = Int32.Parse(txtShOriginX.Text) + Int32.Parse(txtShObjectLength.Text);
+            ShX[1, 5] = Int32.Parse(txtShOriginY.Text);
+            ShX[2, 5] = Int32.Parse(txtShOriginZ.Text) + Int32.Parse(txtShObjectHeight.Text);
+            ShX[3, 5] = 1;
+
+            ShX[0, 6] = Int32.Parse(txtShOriginX.Text) + Int32.Parse(txtShObjectLength.Text);
+            ShX[1, 6] = Int32.Parse(txtShOriginY.Text) + Int32.Parse(txtShObjectWidth.Text);
+            ShX[2, 6] = Int32.Parse(txtShOriginZ.Text) + Int32.Parse(txtShObjectHeight.Text);
+            ShX[3, 6] = 1;
+
+            ShX[0, 7] = Int32.Parse(txtShOriginX.Text);
+            ShX[1, 7] = Int32.Parse(txtShOriginY.Text) + Int32.Parse(txtShObjectWidth.Text);
+            ShX[2, 7] = Int32.Parse(txtShOriginZ.Text) + Int32.Parse(txtShObjectHeight.Text);
+            ShX[3, 7] = 1;
+
+            txtShPointA.Text = String.Format("   A ({0}, {1}, {2})",
+                                             ShX[0, 0], ShX[1, 0], ShX[2, 0]);
+            txtShPointB.Text = String.Format("B ({0}, {1}, {2})",
+                                             ShX[0, 1], ShX[1, 1], ShX[2, 1]);
+            txtShPointC.Text = String.Format("   C ({0}, {1}, {2})",
+                                             ShX[0, 2], ShX[1, 2], ShX[2, 2]);
+            txtShPointD.Text = String.Format("D ({0}, {1}, {2})",
+                                            ShX[0, 3], ShX[1, 3], ShX[2, 3]);
+            txtShPointE.Text = String.Format("   E ({0}, {1}, {2})",
+                                             ShX[0, 4], ShX[1, 4], ShX[2, 4]);
+            txtShPointF.Text = String.Format("F ({0}, {1}, {2})",
+                                             ShX[0, 5], ShX[1, 5], ShX[2, 5]);
+            txtShPointG.Text = String.Format("   G ({0}, {1}, {2})",
+                                             ShX[0, 6], ShX[1, 6], ShX[2, 6]);
+            txtShPointH.Text = String.Format("H ({0}, {1}, {2})",
+                                             ShX[0, 7], ShX[1, 7], ShX[2, 7]);
+
+            ShDrawObjectOrigin();
+        }
+
+        private void Click_btnSetShear(object sender, RoutedEventArgs e)
+        {
+            txtShXY.IsEnabled = false;
+            txtShXZ.IsEnabled = false;
+            txtShYX.IsEnabled = false;
+            txtShYZ.IsEnabled = false;
+            txtShZX.IsEnabled = false;
+            txtShZY.IsEnabled = false;
+            btnSetShear.IsEnabled = false;
+
+            ShF[0, 0] = 1;
+            ShF[0, 1] = Int32.Parse(txtShXY.Text);
+            ShF[0, 2] = Int32.Parse(txtShXZ.Text);
+
+            ShF[1, 1] = 1;
+            ShF[1, 0] = Int32.Parse(txtShYX.Text);
+            ShF[1, 2] = Int32.Parse(txtShYZ.Text);
+
+            ShF[2, 2] = 1;
+            ShF[2, 0] = Int32.Parse(txtShZX.Text);
+            ShF[2, 1] = Int32.Parse(txtShZY.Text);
+
+            ShF[3, 3] = 1;
+
+            //txtTranslateDescription.Text = String.Format("   akan ditranslasi sejauh {0} pada sumbu x, {1} pada sumbu y, dan {2} pada sumbu z",
+            //                                             TrF[0, 3], TrF[1, 3], TrF[2, 3]);
+        }
+
+        private void Click_btnShear(object sender, RoutedEventArgs e)
+        {
+            btnShear.IsEnabled = false;
+            btnShReset.IsEnabled = true;
+
+            MultiplyMatrix(ShY, ShF, ShX);
+
+            if (cbxShObject.SelectedIndex == 0)
+            {
+                txtShMat0.Text = "-> [A' B' C' D'] = [S] * [A B C D]";
+                txtShMat1.Text = String.Format("   | {0,3} {1,3} {2,3} {3,3} |   | {4,3} {5,3} {6,3} {7,3} |   | {8,3} {9,3} {10,3} {11,3} |",
+                                                ShY[0, 0], ShY[0, 1], ShY[0, 2], ShY[0, 3],
+                                                ShF[0, 0], ShF[0, 1], ShF[0, 2], ShF[0, 3],
+                                                ShX[0, 0], ShX[0, 1], ShX[0, 2], ShX[0, 3]);
+                txtShMat2.Text = String.Format("   | {0,3} {1,3} {2,3} {3,3} | = | {4,3} {5,3} {6,3} {7,3} | * | {8,3} {9,3} {10,3} {11,3} |",
+                                                ShY[1, 0], ShY[1, 1], ShY[1, 2], ShY[1, 3],
+                                                ShF[1, 0], ShF[1, 1], ShF[1, 2], ShF[1, 3],
+                                                ShX[1, 0], ShX[1, 1], ShX[1, 2], ShX[1, 3]);
+                txtShMat3.Text = String.Format("   | {0,3} {1,3} {2,3} {3,3} |   | {4,3} {5,3} {6,3} {7,3} |   | {8,3} {9,3} {10,3} {11,3} |",
+                                                ShY[2, 0], ShY[2, 1], ShY[2, 2], ShY[2, 3],
+                                                ShF[2, 0], ShF[2, 1], ShF[2, 2], ShF[2, 3],
+                                                ShX[2, 0], ShX[2, 1], ShX[2, 2], ShX[2, 3]);
+                txtShMat4.Text = String.Format("   | {0,3} {1,3} {2,3} {3,3} |   | {4,3} {5,3} {6,3} {7,3} |   | {8,3} {9,3} {10,3} {11,3} |",
+                                                ShY[3, 0], ShY[3, 1], ShY[3, 2], ShY[3, 3],
+                                                ShF[3, 0], ShF[3, 1], ShF[3, 2], ShF[3, 3],
+                                                ShX[3, 0], ShX[3, 1], ShX[3, 2], ShX[3, 3]);
+            }
+
+            if (cbxShObject.SelectedIndex == 1)
+            {
+                txtShMat0.Text = "-> [A' B' C' D' E' F' G' H'] = [T] * [A B C D E F G H]";
+                txtShMat1.Text = String.Format("   | {0,3} {1,3} {2,3} {3,3} {4,3} {5,3} {6,3} {7,3} |   | {8,3} {9,3} {10,3} {11,3} |   | {12,3} {13,3} {14,3} {15,3} {16,3} {17,3} {18,3} {19,3} |",
+                                               ShY[0, 0], ShY[0, 1], ShY[0, 2], ShY[0, 3], ShY[0, 4], ShY[0, 5], ShY[0, 6], ShY[0, 7],
+                                               ShF[0, 0], ShF[0, 1], ShF[0, 2], ShF[0, 3],
+                                               ShX[0, 0], ShX[0, 1], ShX[0, 2], ShX[0, 3], ShX[0, 4], ShX[0, 5], ShX[0, 6], ShX[0, 7]);
+                txtShMat2.Text = String.Format("   | {0,3} {1,3} {2,3} {3,3} {4,3} {5,3} {6,3} {7,3} | = | {8,3} {9,3} {10,3} {11,3} | * | {12,3} {13,3} {14,3} {15,3} {16,3} {17,3} {18,3} {19,3} |",
+                                               ShY[1, 0], ShY[1, 1], ShY[1, 2], ShY[1, 3], ShY[1, 4], ShY[1, 5], ShY[1, 6], ShY[1, 7],
+                                               ShF[1, 0], ShF[1, 1], ShF[1, 2], ShF[1, 3],
+                                               ShX[1, 0], ShX[1, 1], ShX[1, 2], ShX[1, 3], ShX[1, 4], ShX[1, 5], ShX[1, 6], ShX[1, 7]);
+                txtShMat3.Text = String.Format("   | {0,3} {1,3} {2,3} {3,3} {4,3} {5,3} {6,3} {7,3} |   | {8,3} {9,3} {10,3} {11,3} |   | {12,3} {13,3} {14,3} {15,3} {16,3} {17,3} {18,3} {19,3} |",
+                                               ShY[2, 0], ShY[2, 1], ShY[2, 2], ShY[2, 3], ShY[2, 4], ShY[2, 5], ShY[2, 6], ShY[2, 7],
+                                               ShF[2, 0], ShF[2, 1], ShF[2, 2], ShF[2, 3],
+                                               ShX[2, 0], ShX[2, 1], ShX[2, 2], ShX[2, 3], ShX[2, 4], ShX[2, 5], ShX[2, 6], ShX[2, 7]);
+                txtShMat4.Text = String.Format("   | {0,3} {1,3} {2,3} {3,3} {4,3} {5,3} {6,3} {7,3} |   | {8,3} {9,3} {10,3} {11,3} |   | {12,3} {13,3} {14,3} {15,3} {16,3} {17,3} {18,3} {19,3} |",
+                                               ShY[3, 0], ShY[3, 1], ShY[3, 2], ShY[3, 3], ShY[3, 4], ShY[3, 5], ShY[3, 6], ShY[3, 7],
+                                               ShF[3, 0], ShF[3, 1], ShF[3, 2], ShF[3, 3],
+                                               ShX[3, 0], ShX[3, 1], ShX[3, 2], ShX[3, 3], ShX[3, 4], ShX[3, 5], ShX[3, 6], ShX[3, 7]);
+            }
+
+            ShLineSeparator();
+
+            ShDrawObjectDestination();
+        }
+
+        private void Click_btnShReset(object sender, RoutedEventArgs e)
+        {
+            cbxShObject.IsEnabled = true;
+
+            SetZeroMatrix(ShX);
+            SetZeroMatrix(ShF);
+            SetZeroMatrix(ShY);
+
+            txtShObjectLength.Text = "1";
+            txtShObjectWidth.Text = "1";
+            txtShObjectHeight.Text = "0";
+
+            txtShOriginX.Text = "0";
+            txtShOriginY.Text = "0";
+            txtShOriginZ.Text = "0";
+
+            txtShXY.Text = "0";
+            txtShXY.Text = "0";
+            txtShXY.Text = "0";
+            txtShXY.Text = "0";
+            txtShXY.Text = "0";
+            txtShXY.Text = "0";            
+
+            shearingModelGroup.Children.Clear();
+            ShDrawCartesianAxis();
+        }
+
     }
 }

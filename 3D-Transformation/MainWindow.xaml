@@ -658,7 +658,7 @@
                                 <ComboBox x:Name="cbxSumbuPutar" Margin="2" Grid.Row="0" Grid.ColumnSpan="2" SelectionChanged="SelectionChanged_cbxSumbuPutar"/>
                                 
                                 <TextBlock Text="Sudut Putar :" Margin="2" Grid.Row="1" Grid.Column="0"/>
-                                <TextBox x:Name="txtSudutPutar" Text="0" TextAlignment="Center" MaxLength="2" Margin="2" Grid.Row="1" Grid.Column="1"/>
+                                <TextBox x:Name="txtSudutPutar" Text="0" TextAlignment="Center" MaxLength="3" Margin="2" Grid.Row="1" Grid.Column="1"/>
 
                                 <Button x:Name="btnRoSetRotation" Content="Set Sumbu Putar" Margin="2" Grid.Row="2" Grid.ColumnSpan="6" Click="Click_btnSetRotation"/>
                             </Grid>
@@ -733,6 +733,235 @@
                             <TextBlock x:Name="txtRoMat2" Grid.Row="9" FontFamily="Consolas" Grid.ColumnSpan="2"/>
                             <TextBlock x:Name="txtRoMat3" Grid.Row="10" FontFamily="Consolas" Grid.ColumnSpan="2"/>
                             <TextBlock x:Name="txtRoMat4" Grid.Row="11" FontFamily="Consolas" Grid.ColumnSpan="2"/>
+                        </Grid>
+                    </GroupBox>
+
+                    <Grid Grid.Row="1"  Grid.Column="2" Background="#093145"/>
+                    <Grid Grid.Row="2"  Grid.ColumnSpan="3" Background="#093145"/>
+                </Grid>
+
+                <Grid Grid.Row="1" Grid.Column="1">
+                    <TextBlock Text="Copyright(c) KMKI 2018" FontFamily="Consolas" Foreground="White" FontSize="10" HorizontalAlignment="Right" VerticalAlignment="Bottom"/>
+                </Grid>
+            </Grid>
+        </TabItem>
+
+        <TabItem Header="Shearing">
+            <Grid Background="#093145">
+                <Grid.RowDefinitions>
+                    <RowDefinition/>
+                    <RowDefinition Height="Auto"/>
+                </Grid.RowDefinitions>
+
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition/>
+                    <ColumnDefinition Width="Auto"/>
+                </Grid.ColumnDefinitions>
+
+                <Grid Margin="2" Grid.Row="0" Grid.Column="0" Background="AliceBlue">
+                    <HelixToolkit:HelixViewport3D ModelUpDirection="0,0,1" ShowCoordinateSystem="True" ShowFrameRate="True">
+                        <HelixToolkit:SunLight/>
+                        <ModelVisual3D x:Name="ShModelVisual" Content="{Binding Model}"/>
+                        <HelixToolkit:GridLinesVisual3D MinorDistance="1" MajorDistance="5" Thickness="0.0125" Length="200" Width="200"/>
+                    </HelixToolkit:HelixViewport3D>
+                </Grid>
+
+                <Grid Grid.Row="0" Grid.Column="1" Background="AliceBlue">
+                    <Grid.RowDefinitions>
+                        <RowDefinition/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition/>
+                    </Grid.RowDefinitions>
+
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition/>
+                        <ColumnDefinition Width="Auto"/>
+                        <ColumnDefinition/>
+                    </Grid.ColumnDefinitions>
+
+                    <Grid Grid.RowSpan="3" Grid.Column="0" Background="#093145"/>
+
+                    <Grid Grid.Row="0"  Grid.Column="1" Background="#093145"/>
+
+                    <Grid Grid.RowSpan="3" Grid.Column="2" Background="#093145"/>
+
+                    <Grid Grid.Row="1" Grid.Column="1">
+                        <Grid.RowDefinitions>
+                            <RowDefinition/>
+                            <RowDefinition/>
+                            <RowDefinition/>
+                            <RowDefinition/>
+                        </Grid.RowDefinitions>
+
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition/>
+                            <ColumnDefinition/>
+                        </Grid.ColumnDefinitions>
+
+                        <GroupBox Header="Objek" Margin="2" Grid.Row="0" Grid.ColumnSpan="2">
+                            <Grid>
+                                <Grid.RowDefinitions>
+                                    <RowDefinition/>
+                                    <RowDefinition/>
+                                    <RowDefinition/>
+                                    <RowDefinition/>
+                                    <RowDefinition/>
+                                    <RowDefinition/>
+                                </Grid.RowDefinitions>
+
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition/>
+                                    <ColumnDefinition/>
+                                </Grid.ColumnDefinitions>
+
+                                <TextBlock Text="Pilih Salah Satu Objek :" Margin="2" Grid.Row="0" Grid.ColumnSpan="2"/>
+
+                                <ComboBox x:Name="cbxShObject" Margin="2" Grid.Row="1" Grid.ColumnSpan="2" SelectionChanged="ShObjectSelection"/>
+
+                                <TextBlock Text="Panjang (X) :" Margin="2" Grid.Row="2" Grid.Column="0"/>
+                                <TextBox x:Name="txtShObjectLength" Text="1" TextAlignment="Center" MaxLength="2" Margin="2" Grid.Row="2" Grid.Column="1"/>
+
+                                <TextBlock Text="Lebar (Y) :" Margin="2" Grid.Row="3" Grid.Column="0"/>
+                                <TextBox x:Name="txtShObjectWidth" Text="1" TextAlignment="Center" MaxLength="2" Margin="2" Grid.Row="3" Grid.Column="1"/>
+
+                                <TextBlock Text="Tinggi (Z) :" Margin="2" Grid.Row="4" Grid.Column="0"/>
+                                <TextBox x:Name="txtShObjectHeight" Text="1" TextAlignment="Center" MaxLength="2" Margin="2" Grid.Row="4" Grid.Column="1"/>
+
+                                <Button x:Name="btnShSetObject" Content="Set Objek" Margin="2" Grid.Row="5" Grid.ColumnSpan="2" Click="Click_btnShSetObject"/>
+                            </Grid>
+                        </GroupBox>
+
+                        <GroupBox Header="Titik Awal" Margin="2" Grid.Row="1" Grid.ColumnSpan="2">
+                            <Grid>
+                                <Grid.RowDefinitions>
+                                    <RowDefinition/>
+                                    <RowDefinition/>
+                                </Grid.RowDefinitions>
+
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition/>
+                                    <ColumnDefinition/>
+                                    <ColumnDefinition/>
+                                    <ColumnDefinition/>
+                                    <ColumnDefinition/>
+                                    <ColumnDefinition/>
+                                </Grid.ColumnDefinitions>
+
+                                <TextBlock Text="X :" Margin="2" Grid.Row="0" Grid.Column="0"/>
+                                <TextBox x:Name="txtShOriginX" Text="0" TextAlignment="Center" MaxLength="2" Width="25" Margin="2" Grid.Row="0" Grid.Column="1"/>
+                                <TextBlock Text="Y :" Margin="2" Grid.Row="0" Grid.Column="2"/>
+                                <TextBox x:Name="txtShOriginY" Text="0" TextAlignment="Center" MaxLength="2" Width="25" Margin="2" Grid.Row="0" Grid.Column="3"/>
+                                <TextBlock Text="Z :" Margin="2" Grid.Row="0" Grid.Column="4"/>
+                                <TextBox x:Name="txtShOriginZ" Text="0" TextAlignment="Center" MaxLength="2" Width="25" Margin="2" Grid.Row="0" Grid.Column="5"/>
+
+                                <Button x:Name="btnShSetOrigin" Content="Set Titik Awal" Margin="2" Grid.Row="1" Grid.ColumnSpan="6" Click="Click_btnShSetOrigin"/>
+                            </Grid>
+                        </GroupBox>
+
+                        <GroupBox Header="Shearing" Margin="2" Grid.Row="2" Grid.ColumnSpan="2">
+                            <Grid>
+                                <Grid.RowDefinitions>
+                                    <RowDefinition/>
+                                    <RowDefinition/>
+                                    <RowDefinition/>
+                                    <RowDefinition/>
+                                </Grid.RowDefinitions>
+
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition/>
+                                    <ColumnDefinition/>
+                                    <ColumnDefinition/>
+                                    <ColumnDefinition/>
+                                </Grid.ColumnDefinitions>
+
+                                <TextBlock Text="Sh X->Y :" Margin="2" Grid.Row="0" Grid.Column="0"/>
+                                <TextBox x:Name="txtShXY" Text="0" TextAlignment="Center" MaxLength="2" Width="25" Margin="2" Grid.Row="0" Grid.Column="1"/>
+                                <TextBlock Text="Sh X->Z :" Margin="2" Grid.Row="0" Grid.Column="2"/>
+                                <TextBox x:Name="txtShXZ" Text="0" TextAlignment="Center" MaxLength="2" Width="25" Margin="2" Grid.Row="0" Grid.Column="3"/>
+
+                                <TextBlock Text="Sh Y->X :" Margin="2" Grid.Row="1" Grid.Column="0"/>
+                                <TextBox x:Name="txtShYX" Text="0" TextAlignment="Center" MaxLength="2" Width="25" Margin="2" Grid.Row="1" Grid.Column="1"/>
+                                <TextBlock Text="Sh Y->Z :" Margin="2" Grid.Row="1" Grid.Column="2"/>
+                                <TextBox x:Name="txtShYZ" Text="0" TextAlignment="Center" MaxLength="2" Width="25" Margin="2" Grid.Row="1" Grid.Column="3"/>
+
+                                <TextBlock Text="Sh Z->X :" Margin="2" Grid.Row="2" Grid.Column="0"/>
+                                <TextBox x:Name="txtShZX" Text="0" TextAlignment="Center" MaxLength="2" Width="25" Margin="2" Grid.Row="2" Grid.Column="1"/>
+                                <TextBlock Text="Sh Z->Y :" Margin="2" Grid.Row="2" Grid.Column="2"/>
+                                <TextBox x:Name="txtShZY" Text="0" TextAlignment="Center" MaxLength="2" Width="25" Margin="2" Grid.Row="2" Grid.Column="3"/>
+
+                                <Button x:Name="btnSetShear" Content="Set Shearing" Margin="2" Grid.Row="3" Grid.ColumnSpan="4" Click="Click_btnSetShear"/>
+                            </Grid>
+                        </GroupBox>
+
+                        <Button x:Name="btnShear" Content="Shear" Margin="2" Grid.Row="3" Grid.Column="0" Click="Click_btnShear"/>
+                        <Button x:Name="btnShReset" Content="Reset" Margin="2" Grid.Row="3" Grid.Column="1" IsEnabled="False" Click="Click_btnShReset"/>
+                    </Grid>
+
+                    <Grid Grid.Row="2"  Grid.Column="1" Background="#093145"/>
+                </Grid>
+
+                <Grid Grid.Row="1" Grid.Column="0" Background="AliceBlue">
+                    <Grid.RowDefinitions>
+                        <RowDefinition/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition/>
+                    </Grid.RowDefinitions>
+
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition/>
+                        <ColumnDefinition Width="Auto"/>
+                        <ColumnDefinition/>
+                    </Grid.ColumnDefinitions>
+
+                    <Grid Grid.Row="0"  Grid.ColumnSpan="3" Background="#093145"/>
+
+                    <Grid Grid.Row="1"  Grid.Column="0" Background="#093145"/>
+
+                    <GroupBox Header="Matriks Transformasi" Margin="2" Grid.Row="1" Grid.Column="1">
+                        <Grid>
+                            <Grid.RowDefinitions>
+                                <RowDefinition/>
+                                <RowDefinition/>
+                                <RowDefinition/>
+                                <RowDefinition/>
+                                <RowDefinition/>
+                                <RowDefinition/>
+                                <RowDefinition/>
+                                <RowDefinition/>
+                                <RowDefinition/>
+                                <RowDefinition/>
+                                <RowDefinition/>
+                                <RowDefinition/>
+                            </Grid.RowDefinitions>
+
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition/>
+                                <ColumnDefinition/>
+                            </Grid.ColumnDefinitions>
+
+                            <TextBlock x:Name="txtShObjectDescription" FontFamily="Consolas" Grid.Row="0" Grid.ColumnSpan="2"/>
+
+                            <TextBlock x:Name="txtShearDescription" FontFamily="Consolas" Grid.Row="1" Grid.ColumnSpan="2"/>
+
+                            <TextBlock x:Name="txtShPointA" FontFamily="Consolas" Grid.Row="2" Grid.Column="0"/>
+                            <TextBlock x:Name="txtShPointB" FontFamily="Consolas" Grid.Row="2" Grid.Column="1"/>
+
+                            <TextBlock x:Name="txtShPointC" FontFamily="Consolas" Grid.Row="3" Grid.Column="0"/>
+                            <TextBlock x:Name="txtShPointD" FontFamily="Consolas" Grid.Row="3" Grid.Column="1"/>
+
+                            <TextBlock x:Name="txtShPointE" FontFamily="Consolas" Grid.Row="4" Grid.Column="0"/>
+                            <TextBlock x:Name="txtShPointF" FontFamily="Consolas" Grid.Row="4" Grid.Column="1"/>
+
+                            <TextBlock x:Name="txtShPointG" FontFamily="Consolas" Grid.Row="5" Grid.Column="0"/>
+                            <TextBlock x:Name="txtShPointH" FontFamily="Consolas" Grid.Row="5" Grid.Column="1"/>
+
+                            <TextBlock x:Name="txtShLine" FontFamily="Consolas" Grid.Row="6" Grid.ColumnSpan="2"/>
+
+                            <TextBlock x:Name="txtShMat0" FontFamily="Consolas" Grid.Row="7" Grid.ColumnSpan="2"/>
+                            <TextBlock x:Name="txtShMat1" Grid.Row="8" FontFamily="Consolas" Grid.ColumnSpan="2"/>
+                            <TextBlock x:Name="txtShMat2" Grid.Row="9" FontFamily="Consolas" Grid.ColumnSpan="2"/>
+                            <TextBlock x:Name="txtShMat3" Grid.Row="10" FontFamily="Consolas" Grid.ColumnSpan="2"/>
+                            <TextBlock x:Name="txtShMat4" Grid.Row="11" FontFamily="Consolas" Grid.ColumnSpan="2"/>
                         </Grid>
                     </GroupBox>
 
