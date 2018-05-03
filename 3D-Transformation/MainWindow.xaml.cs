@@ -850,8 +850,7 @@ namespace _3D_Transformation
             meshBuilder.AddPipe(new Point3D(RoX[0, 0], RoX[1, 0], RoX[2, 0]), new Point3D(RoX[0, 1], RoX[1, 1], RoX[2, 1]), 0, 0.2, 360);
             meshBuilder.AddPipe(new Point3D(RoX[0, 0], RoX[1, 0], RoX[2, 0]), new Point3D(RoX[0, 3], RoX[1, 3], RoX[2, 3]), 0, 0.2, 360);
             meshBuilder.AddPipe(new Point3D(RoX[0, 2], RoX[1, 2], RoX[2, 2]), new Point3D(RoX[0, 1], RoX[1, 1], RoX[2, 1]), 0, 0.2, 360);
-            meshBuilder.AddPipe(new Point3D(RoX[0, 2], RoX[1, 2], RoX[2, 2]), new Point3D(RoX[0, 3], RoX[1, 3], RoX[2, 3]), 0, 0.2, 360);
-            meshBuilder.AddCube();           
+            meshBuilder.AddPipe(new Point3D(RoX[0, 2], RoX[1, 2], RoX[2, 2]), new Point3D(RoX[0, 3], RoX[1, 3], RoX[2, 3]), 0, 0.2, 360);                    
 
             if (cbxRoObject.SelectedIndex == 1)
             {

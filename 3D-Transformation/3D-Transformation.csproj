@@ -27,7 +27,7 @@
     <TargetCulture>en</TargetCulture>
     <ProductName>Transformasi 3D</ProductName>
     <PublisherName>KMKI</PublisherName>
-    <ApplicationRevision>4</ApplicationRevision>
+    <ApplicationRevision>6</ApplicationRevision>
     <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
     <UseApplicationTrust>false</UseApplicationTrust>
     <PublishWizardCompleted>true</PublishWizardCompleted>
