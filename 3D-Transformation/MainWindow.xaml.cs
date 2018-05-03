@@ -20,20 +20,20 @@ using System.Windows.Shapes;
 namespace _3D_Transformation
 {
     public partial class MainWindow : Window
-    {        
+    {            
         Model3DGroup translationModelGroup = new Model3DGroup();
         Model3DGroup scalingModelGroup = new Model3DGroup();
         Model3DGroup rotationModelGroup = new Model3DGroup();
         Model3DGroup shearingModelGroup = new Model3DGroup();
-
+        
         private int[,] TrX = new int[4, 8];
         private int[,] TrF = new int[4, 4];
         private int[,] TrY = new int[4, 8];
-
+        
         private int[,] ScX = new int[4, 8];
         private int[,] ScF = new int[4, 4];
         private int[,] ScY = new int[4, 8];
-
+        
         private double[,] RoX = new double[4, 8];
         private double[,] RoF = new double[4, 12];
         private double[,] RoA = new double[4, 4];
@@ -43,15 +43,16 @@ namespace _3D_Transformation
         private double[,] RoE = new double[4, 8];
         private double[,] RoM = new double[4, 4];
         private double[,] RoY = new double[4, 8];
-
+       
         private int[,] ShX = new int[4, 8];
         private int[,] ShF = new int[4, 4];
         private int[,] ShY = new int[4, 8];
-
+        
         public MainWindow()
         {
+            //Inisialisasi komponen UI pada program
             InitializeComponent();
-
+            
             SetZeroMatrix(TrX);
             SetZeroMatrix(TrF);
             SetZeroMatrix(TrY);
@@ -85,7 +86,7 @@ namespace _3D_Transformation
             ShDisableAllInput();
             ShDrawCartesianAxis();
         }
-
+        
         private void SetZeroMatrix(int[,] matrix)
         {
             for (int row = 0; row < matrix.GetLength(0); row++)
@@ -96,7 +97,6 @@ namespace _3D_Transformation
                 }
             }
         }
-
         private void SetZeroMatrix(double[,] matrix)
         {
             for (int row = 0; row < matrix.GetLength(0); row++)
@@ -107,7 +107,7 @@ namespace _3D_Transformation
                 }
             }
         }
-
+        
         private void MultiplyMatrix(int[,] resultMatrix, int[,]firstMatrix, int[,]secondMatrix)
         {
             for (int i = 0; i < resultMatrix.GetLength(0); i++)
@@ -121,7 +121,6 @@ namespace _3D_Transformation
                 }
             }
         }
-
         private void MultiplyMatrix(double[,] resultMatrix, double[,] firstMatrix, double[,] secondMatrix)
         {
             for (int i = 0; i < resultMatrix.GetLength(0); i++)
@@ -135,15 +134,7 @@ namespace _3D_Transformation
                 }
             }
         }
-
-        // Translation
-        //  _______ _____            _   _  _____ _            _______ _____ ____  _   _ 
-        // |__   __|  __ \     /\   | \ | |/ ____| |        /\|__   __|_   _/ __ \| \ | |
-        //    | |  | |__) |   /  \  |  \| | (___ | |       /  \  | |    | || |  | |  \| |
-        //    | |  |  _  /   / /\ \ | . ` |\___ \| |      / /\ \ | |    | || |  | | . ` |
-        //    | |  | | \ \  / ____ \| |\  |____) | |____ / ____ \| |   _| || |__| | |\  |
-        //    |_|  |_|  \_\/_/    \_\_| \_|_____/|______/_/    \_\_|  |_____\____/|_| \_|        
-
+        
         private void TrDrawCartesianAxis()
         {
             var axisBuilder = new MeshBuilder(true, true, true);
@@ -164,7 +155,7 @@ namespace _3D_Transformation
         public void TrDrawObjectOrigin()
         {
             var meshBuilder = new MeshBuilder(false, false);
-            meshBuilder.AddBox(new Rect3D(TrX[0, 0], TrX[1, 0], TrX[2, 0], Int32.Parse(txtTrObjectLength.Text), Int32.Parse(txtTrObjectWidth.Text), Int32.Parse(txtTrObjectHeight.Text)));
+            meshBuilder.AddBox(new Rect3D(TrX[0, 0], TrX[1, 0], TrX[2, 0], Int32.Parse(txtTrObjectLength.Text), Int32.Parse(txtTrObjectWidth.Text), Int32.Parse(txtTrObjectHeight.Text)));            
 
             var mesh = meshBuilder.ToMesh(true);
             
@@ -481,15 +472,7 @@ namespace _3D_Transformation
 
             translationModelGroup.Children.Clear();
             TrDrawCartesianAxis();
-        }
-
-        // Scaling
-        //   _____  _____          _      _____ _   _  _____ 
-        //  / ____|/ ____|   /\   | |    |_   _| \ | |/ ____|
-        // | (___ | |       /  \  | |      | | |  \| | |  __ 
-        //  \___ \| |      / /\ \ | |      | | | . ` | | |_ |
-        //  ____) | |____ / ____ \| |____ _| |_| |\  | |__| |
-        // |_____/ \_____/_/    \_\______|_____|_| \_|\_____|
+        }        
 
         private void ScDrawCartesianAxis()
         {
@@ -841,9 +824,7 @@ namespace _3D_Transformation
 
             scalingModelGroup.Children.Clear();
             ScDrawCartesianAxis();            
-        }
-
-        // Rotation
+        }        
 
         private void RoDrawCartesianAxis()
         {
@@ -870,11 +851,7 @@ namespace _3D_Transformation
             meshBuilder.AddPipe(new Point3D(RoX[0, 0], RoX[1, 0], RoX[2, 0]), new Point3D(RoX[0, 3], RoX[1, 3], RoX[2, 3]), 0, 0.2, 360);
             meshBuilder.AddPipe(new Point3D(RoX[0, 2], RoX[1, 2], RoX[2, 2]), new Point3D(RoX[0, 1], RoX[1, 1], RoX[2, 1]), 0, 0.2, 360);
             meshBuilder.AddPipe(new Point3D(RoX[0, 2], RoX[1, 2], RoX[2, 2]), new Point3D(RoX[0, 3], RoX[1, 3], RoX[2, 3]), 0, 0.2, 360);
-
-            /*meshBuilder.AddSphere(new Point3D(RoX[0, 0], RoX[1, 0], RoX[2, 0]), 0.1, 360, 360);
-            meshBuilder.AddSphere(new Point3D(RoX[0, 1], RoX[1, 1], RoX[2, 1]), 0.1, 360, 360);
-            meshBuilder.AddSphere(new Point3D(RoX[0, 2], RoX[1, 2], RoX[2, 2]), 0.1, 360, 360);            
-            meshBuilder.AddSphere(new Point3D(RoX[0, 3], RoX[1, 3], RoX[2, 3]), 0.1, 360, 360);*/
+            meshBuilder.AddCube();           
 
             if (cbxRoObject.SelectedIndex == 1)
             {
@@ -886,12 +863,7 @@ namespace _3D_Transformation
                 meshBuilder.AddPipe(new Point3D(RoX[0, 0], RoX[1, 0], RoX[2, 0]), new Point3D(RoX[0, 4], RoX[1, 4], RoX[2, 4]), 0, 0.2, 360);
                 meshBuilder.AddPipe(new Point3D(RoX[0, 1], RoX[1, 1], RoX[2, 1]), new Point3D(RoX[0, 5], RoX[1, 5], RoX[2, 5]), 0, 0.2, 360);
                 meshBuilder.AddPipe(new Point3D(RoX[0, 2], RoX[1, 2], RoX[2, 2]), new Point3D(RoX[0, 6], RoX[1, 6], RoX[2, 6]), 0, 0.2, 360);
-                meshBuilder.AddPipe(new Point3D(RoX[0, 3], RoX[1, 3], RoX[2, 3]), new Point3D(RoX[0, 7], RoX[1, 7], RoX[2, 7]), 0, 0.2, 360);
-
-                /*meshBuilder.AddSphere(new Point3D(RoX[0, 4], RoX[1, 4], RoX[2, 4]), 0.1, 360, 360);
-                meshBuilder.AddSphere(new Point3D(RoX[0, 5], RoX[1, 5], RoX[2, 5]), 0.1, 360, 360);
-                meshBuilder.AddSphere(new Point3D(RoX[0, 6], RoX[1, 6], RoX[2, 6]), 0.1, 360, 360);
-                meshBuilder.AddSphere(new Point3D(RoX[0, 7], RoX[1, 7], RoX[2, 7]), 0.1, 360, 360);*/
+                meshBuilder.AddPipe(new Point3D(RoX[0, 3], RoX[1, 3], RoX[2, 3]), new Point3D(RoX[0, 7], RoX[1, 7], RoX[2, 7]), 0, 0.2, 360);                
             }
 
             var mesh = meshBuilder.ToMesh(true);
@@ -1320,9 +1292,7 @@ namespace _3D_Transformation
             rotationModelGroup.Children.Clear();
             RoDrawCartesianAxis();
         }
-
-        //Shearing
-
+        
         private void ShDrawCartesianAxis()
         {
             var axisBuilder = new MeshBuilder(true, true, true);
@@ -1627,9 +1597,7 @@ namespace _3D_Transformation
             ShF[2, 1] = Int32.Parse(txtShZY.Text);
 
             ShF[3, 3] = 1;
-
-            //txtTranslateDescription.Text = String.Format("   akan ditranslasi sejauh {0} pada sumbu x, {1} pada sumbu y, dan {2} pada sumbu z",
-            //                                             TrF[0, 3], TrF[1, 3], TrF[2, 3]);
+                        
         }
 
         private void Click_btnShear(object sender, RoutedEventArgs e)
@@ -1703,15 +1671,14 @@ namespace _3D_Transformation
             txtShOriginZ.Text = "0";
 
             txtShXY.Text = "0";
-            txtShXY.Text = "0";
-            txtShXY.Text = "0";
-            txtShXY.Text = "0";
-            txtShXY.Text = "0";
-            txtShXY.Text = "0";            
+            txtShXZ.Text = "0";
+            txtShYX.Text = "0";
+            txtShYZ.Text = "0";
+            txtShZX.Text = "0";
+            txtShZY.Text = "0";            
 
             shearingModelGroup.Children.Clear();
             ShDrawCartesianAxis();
         }
-
     }
 }
