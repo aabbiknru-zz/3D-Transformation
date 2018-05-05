@@ -878,17 +878,17 @@ namespace _3D_Transformation
         private void RoDrawRotationAxis()
         {
             var axisBuilder = new MeshBuilder(false, false);
-            if (cbxSumbuPutar.SelectedIndex == 0)
+            if (cbxSumbuPutar.SelectedIndex == 3)
             {
                 axisBuilder.AddPipe(new Point3D(-100, Int32.Parse(txtRoOriginY.Text), Int32.Parse(txtRoOriginZ.Text)), new Point3D(100, Int32.Parse(txtRoOriginY.Text), Int32.Parse(txtRoOriginZ.Text)), 0, 0.2, 360);
             }
 
-            if (cbxSumbuPutar.SelectedIndex == 1)
+            if (cbxSumbuPutar.SelectedIndex == 4)
             {
                 axisBuilder.AddPipe(new Point3D(Int32.Parse(txtRoOriginX.Text), -100, Int32.Parse(txtRoOriginZ.Text)), new Point3D(Int32.Parse(txtRoOriginX.Text), 100, Int32.Parse(txtRoOriginZ.Text)), 0, 0.2, 360);
             }
 
-            if (cbxSumbuPutar.SelectedIndex == 2)
+            if (cbxSumbuPutar.SelectedIndex == 5)
             {
                 axisBuilder.AddPipe(new Point3D(Int32.Parse(txtRoOriginX.Text), Int32.Parse(txtRoOriginY.Text), -100), new Point3D(Int32.Parse(txtRoOriginX.Text), Int32.Parse(txtRoOriginY.Text), 100), 0, 0.2, 360);
             }                        
@@ -999,6 +999,9 @@ namespace _3D_Transformation
         {
             cbxSumbuPutar.Items.Clear();
 
+            cbxSumbuPutar.Items.Add("Sumbu X");
+            cbxSumbuPutar.Items.Add("Sumbu Y");
+            cbxSumbuPutar.Items.Add("Sumbu Z");
             cbxSumbuPutar.Items.Add("Garis AB");
             cbxSumbuPutar.Items.Add("Garis AD");
             if (cbxRoObject.SelectedIndex == 1)
@@ -1174,7 +1177,7 @@ namespace _3D_Transformation
             txtSudutPutar.IsEnabled = false;
             btnSetTranslation.IsEnabled = false;            
 
-            if (cbxSumbuPutar.SelectedIndex == 0)
+            if (cbxSumbuPutar.SelectedIndex == 0 || cbxSumbuPutar.SelectedIndex == 3)
             {
                 RoF[0, 4] = 1;
                 RoF[1, 5] = Math.Cos(sudutPutar);
@@ -1184,7 +1187,7 @@ namespace _3D_Transformation
                 RoF[3, 7] = 1;
             }
 
-            if (cbxSumbuPutar.SelectedIndex == 1)
+            if (cbxSumbuPutar.SelectedIndex == 1 || cbxSumbuPutar.SelectedIndex == 4)
             {                
                 RoF[0, 4] = Math.Cos(sudutPutar);
                 RoF[0, 6] = Math.Sin(sudutPutar);
@@ -1194,7 +1197,7 @@ namespace _3D_Transformation
                 RoF[3, 7] = 1;
             }
 
-            if (cbxSumbuPutar.SelectedIndex == 2)
+            if (cbxSumbuPutar.SelectedIndex == 2 || cbxSumbuPutar.SelectedIndex == 5)
             {                
                 RoF[0, 4] = Math.Cos(sudutPutar);
                 RoF[0, 5] = -Math.Sin(sudutPutar);
@@ -1228,10 +1231,18 @@ namespace _3D_Transformation
             btnRotate.IsEnabled = false;
             btnRoReset.IsEnabled = true;
 
-            InitializeMatrix();            
-            MultiplyMatrix(RoD, RoC, RoX);
-            MultiplyMatrix(RoE, RoB, RoD);
-            MultiplyMatrix(RoY, RoA, RoE);
+            InitializeMatrix();
+
+            if (cbxSumbuPutar.SelectedIndex >= 3 && cbxSumbuPutar.SelectedIndex <= 5)
+            {
+                MultiplyMatrix(RoD, RoC, RoX);
+                MultiplyMatrix(RoE, RoB, RoD);
+                MultiplyMatrix(RoY, RoA, RoE);
+            }
+            else
+            {
+                MultiplyMatrix(RoY, RoB, RoX);
+            }
             
             for (int i = 0; i < 4; i++)
             {
